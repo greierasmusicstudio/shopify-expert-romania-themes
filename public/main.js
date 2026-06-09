@@ -36,6 +36,12 @@ function initPageTransitions() {
       }, 400);
     });
   });
+
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+      preloader.classList.add('loaded');
+    }
+  });
 }
 
 // Custom cursor and magnetic elements removed per user request
