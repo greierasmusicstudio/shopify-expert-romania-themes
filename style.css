@@ -49,6 +49,27 @@ a {
   opacity: 0;
 }
 
+/* Scroll Reveal Classes */
+.reveal {
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform, opacity;
+}
+.reveal-up { transform: translateY(40px); }
+.reveal-left { transform: translateX(-40px); }
+.reveal-right { transform: translateX(40px); }
+
+.reveal.active {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Stagger reveals inside grids */
+.reveal-stagger-1 { transition-delay: 0.1s; }
+.reveal-stagger-2 { transition-delay: 0.2s; }
+.reveal-stagger-3 { transition-delay: 0.3s; }
+.reveal-stagger-4 { transition-delay: 0.4s; }
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -62,6 +83,138 @@ a {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+/* ========================================= */
+/* PREMIUM ANIMATIONS & MICRO-INTERACTIONS   */
+/* ========================================= */
+
+/* 1. Page Transition Preloader */
+.preloader {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: #050505;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.6s cubic-bezier(0.8, 0, 0.2, 1);
+  transform-origin: top;
+}
+.preloader.loaded {
+  transform: scaleY(0);
+}
+.loader-inner {
+  width: 40px; height: 40px;
+  border: 2px solid rgba(255,255,255,0.1);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* 2. Custom Cursor */
+body { cursor: default; } /* Hide default cursor */
+a, button, input[type="range"] { cursor: none; } /* Hide pointer */
+
+.custom-cursor {
+  position: fixed; top: 0; left: 0;
+  width: 6px; height: 6px;
+  background: #fff;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 100000;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s;
+  mix-blend-mode: difference;
+}
+.cursor-follower {
+  position: fixed; top: 0; left: 0;
+  width: 40px; height: 40px;
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s, background 0.3s, border-color 0.3s;
+}
+.cursor-hover {
+  width: 60px; height: 60px;
+  background: rgba(255,255,255,0.1);
+  border-color: transparent;
+  backdrop-filter: blur(2px);
+}
+.cursor-hover-point {
+  width: 0; height: 0; /* Hide inner dot on hover */
+}
+
+@media (max-width: 768px) {
+  body, a, button { cursor: auto !important; }
+  .custom-cursor, .cursor-follower { display: none !important; }
+}
+
+/* 3. 3D Tilt & Magnetic Effects */
+.product-card {
+  transition: transform 0.1s ease-out, box-shadow 0.3s;
+  transform-style: preserve-3d;
+}
+.product-card:hover {
+  box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+  border-color: rgba(255,255,255,0.3);
+}
+
+/* 4. Infinite Marquee */
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  background: #111;
+  color: #fff;
+  padding: 1rem 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  position: relative;
+  display: flex;
+  white-space: nowrap;
+}
+.marquee-content {
+  display: flex;
+  animation: marquee 20s linear infinite;
+}
+.marquee-content span {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0 2rem;
+  font-weight: 500;
+  display: flex; align-items: center; gap: 2rem;
+}
+.marquee-content span::after {
+  content: "✦";
+  color: rgba(255,255,255,0.3);
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* 5. Nav Underline Micro-interaction */
+.main-nav a, .fashion-menu a, .beauty-menu a, .tech-nav-links a {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 2px;
+}
+.main-nav a::after, .fashion-menu a::after, .beauty-menu a::after, .tech-nav-links a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+.main-nav a:hover::after, .fashion-menu a:hover::after, .beauty-menu a:hover::after, .tech-nav-links a:hover::after {
+  width: 100%;
 }
 
 /* Complex Components (Global) */
