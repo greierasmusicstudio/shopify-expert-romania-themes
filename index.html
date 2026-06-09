@@ -140,9 +140,127 @@
     .theme-card:nth-child(5) { animation-delay: 0.5s; }
     .theme-card:nth-child(6) { animation-delay: 0.6s; }
 
+    /* Login Overlay */
+    #secure-login-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: #050505;
+      z-index: 999999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.6s ease;
+    }
+    
+    .login-card {
+      background: rgba(20, 25, 22, 0.8);
+      border: 1px solid rgba(0, 128, 96, 0.3);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 3rem;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+    }
+    
+    .login-card h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+    
+    .login-card p {
+      color: #aaa;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+    
+    .login-input {
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    
+    .login-input:focus {
+      border-color: #008060;
+    }
+    
+    .login-btn {
+      width: 100%;
+      padding: 1rem;
+      background: #008060;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    .login-btn:hover {
+      background: #00664d;
+    }
+    
+    #login-error {
+      color: #ff4d4d;
+      font-size: 0.85rem;
+      margin-top: 1rem;
+      display: none;
+    }
   </style>
 </head>
 <body class="hub-body">
+
+  <div id="secure-login-overlay">
+    <div class="login-card">
+      <h2>Restricted Access</h2>
+      <p>Introduceți datele de acces pentru a vizualiza colecția de teme demo Shopify Expert Romania.</p>
+      <input type="text" id="login-user" class="login-input" placeholder="Admin (ex: shopify)" autocomplete="off">
+      <input type="password" id="login-pass" class="login-input" placeholder="Parolă">
+      <button id="login-btn" class="login-btn">Autentificare Securizată</button>
+      <p id="login-error">Acces respins. Date incorecte.</p>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const overlay = document.getElementById('secure-login-overlay');
+      const user = document.getElementById('login-user');
+      const pass = document.getElementById('login-pass');
+      const btn = document.getElementById('login-btn');
+      const err = document.getElementById('login-error');
+
+      if(sessionStorage.getItem('hub_auth') === 'true') {
+        overlay.style.display = 'none';
+      }
+
+      function login() {
+        if(user.value === 'shopify' && pass.value === 'romania2026') {
+          sessionStorage.setItem('hub_auth', 'true');
+          overlay.style.opacity = '0';
+          setTimeout(() => { overlay.style.display = 'none'; }, 600);
+        } else {
+          err.style.display = 'block';
+          pass.value = '';
+        }
+      }
+
+      btn.addEventListener('click', login);
+      pass.addEventListener('keypress', e => { if(e.key === 'Enter') login(); });
+      user.addEventListener('keypress', e => { if(e.key === 'Enter') login(); });
+    });
+  </script>
+
   <div class="hub-overlay"></div>
   
   <header class="hub-header">
