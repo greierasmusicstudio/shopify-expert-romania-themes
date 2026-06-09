@@ -183,3 +183,73 @@ a {
   line-height: 1.6;
 }
 
+/* --- GLOBAL RESPONSIVE FIXES --- */
+@media (max-width: 1024px) {
+  .grid-2 { grid-template-columns: 1fr; gap: 2rem; }
+  .grid-3 { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+@media (max-width: 768px) {
+  html, body { overflow-x: hidden; width: 100%; max-width: 100vw; }
+  
+  /* Global Layout */
+  .section-title { font-size: 2rem !important; }
+  .section-text { font-size: 1rem !important; }
+  .cta-section { padding: 4rem 1.5rem !important; }
+  .cta-title { font-size: 2rem !important; }
+  
+  /* Navigation Menus */
+  .fashion-menu, .tech-nav-links, .bio-menu, .pets-menu, .beauty-menu, .edu-nav-links, .nav-links {
+    display: none !important;
+  }
+  .fashion-nav, .tech-nav, .bio-nav, .pets-nav, .beauty-nav, .edu-nav, .main-nav {
+    padding: 1rem 1.5rem !important;
+  }
+  .fashion-logo, .tech-logo, .bio-logo, .pets-logo, .beauty-logo, .edu-logo {
+    font-size: 1.2rem !important;
+  }
+
+  /* Heroes */
+  .fashion-hero-title { font-size: 3rem !important; }
+  .tech-hero-title { font-size: 3rem !important; }
+  .bio-hero-title { font-size: 3rem !important; }
+  .pets-hero-title { font-size: 3rem !important; }
+  .beauty-hero-title { font-size: 3rem !important; }
+  .edu-hero-title { font-size: 2.5rem !important; }
+  .hero-title { font-size: 3rem !important; }
+  
+  .hub-header h1 { font-size: 2.5rem !important; }
+  .hub-header p { font-size: 1rem !important; padding: 0 1rem; }
+  
+  .hero-subtitle { font-size: 1rem !important; }
+  .hero-content { padding: 0 1.5rem !important; }
+  
+  /* Sections Padding */
+  .fashion-section, .tech-section, .bio-section, .pets-section, .beauty-section, .edu-section {
+    padding: 4rem 1.5rem !important;
+  }
+  
+  /* Buttons */
+  .back-btn { bottom: 1rem !important; right: 1rem !important; padding: 0.8rem 1.2rem !important; font-size: 0.8rem !important; }
+  
+  /* Grids */
+  .product-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2rem !important; }
+  .features-grid { grid-template-columns: 1fr; gap: 2rem; margin-top: 2rem !important; }
+  
+  /* Product Cards */
+  .product-info { padding: 1rem; }
+  .product-title { font-size: 1.1rem; }
+  .product-price { font-size: 1rem; }
+}
+
+@media (max-width: 480px) {
+  .product-grid { grid-template-columns: 1fr; }
+  .fashion-hero-title { font-size: 2.5rem !important; }
+  .tech-hero-title { font-size: 2.5rem !important; }
+  .bio-hero-title { font-size: 2.5rem !important; }
+  .pets-hero-title { font-size: 2.5rem !important; }
+  .beauty-hero-title { font-size: 2.5rem !important; }
+  .edu-hero-title { font-size: 2rem !important; }
+  .hero-title { font-size: 2.5rem !important; }
+  .hub-header h1 { font-size: 2rem !important; }
+}
