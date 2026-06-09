@@ -170,10 +170,8 @@
     .comp-before {
       clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
       z-index: 2;
-      filter: saturate(0.2) contrast(1.1) sepia(0.3) brightness(0.9); /* Simulates dull/dry skin */
     }
     .comp-after {
-      filter: saturate(1.1) brightness(1.05); /* Simulates glowing/hydrated skin */
     }
     .comp-slider {
       position: absolute;
@@ -294,10 +292,10 @@
     
     <div class="comp-container">
       <!-- After Image (Hydrated) -->
-      <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=1200&auto=format&fit=crop" class="comp-img comp-after" alt="Piele Hidratată">
+      <img src="/assets/beauty_after_skin.png" class="comp-img comp-after" alt="Piele Hidratată">
       
       <!-- Before Image (Dry) -->
-      <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=1200&auto=format&fit=crop" class="comp-img comp-before" id="comp-before" alt="Piele Uscată">
+      <img src="/assets/beauty_before_skin.png" class="comp-img comp-before" id="comp-before" alt="Piele Uscată">
       
       <!-- Slider Input -->
       <input type="range" min="0" max="100" value="50" id="comp-slider" class="comp-slider" aria-label="Compară pielea înainte și după">
