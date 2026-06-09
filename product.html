@@ -172,10 +172,39 @@
     @media (max-width: 968px) {
       .product-details-container {
         grid-template-columns: 1fr;
-        gap: 3rem;
+        gap: 2.5rem;
       }
       .product-wrapper {
         padding: 8rem 2rem 4rem 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .product-wrapper {
+        padding: 6.5rem 1.25rem 3rem 1.25rem;
+      }
+      .title-display {
+        font-size: 2.2rem;
+      }
+      .purchase-row {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+      .details-nav {
+        padding: 1rem 1.25rem;
+      }
+      .details-logo {
+        font-size: 1.4rem;
+      }
+      .back-btn-header {
+        font-size: 0.8rem;
+        padding: 0.5rem 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .breadcrumbs {
+        display: none;
       }
     }
 
@@ -958,7 +987,11 @@
       
       const backLink = document.getElementById("back-link");
       backLink.href = `/${product.categorySlug}/`;
-      backLink.innerText = `← Înapoi la Magazinul ${product.category}`;
+      if (window.innerWidth < 768) {
+        backLink.innerText = "← Înapoi";
+      } else {
+        backLink.innerText = `← Înapoi la Magazinul ${product.category}`;
+      }
 
       document.getElementById("crumb-category").href = `/${product.categorySlug}/`;
       document.getElementById("crumb-category").innerText = product.category;
