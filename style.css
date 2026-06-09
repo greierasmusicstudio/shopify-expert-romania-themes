@@ -209,7 +209,34 @@ a {
     font-size: 1.2rem !important;
   }
 
-  /* Heroes */
+  /* Heroes Typography & Layout */
+  .tech-hero, .bio-hero, .pets-hero, .beauty-hero, .edu-hero {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    padding: 6rem 1.5rem 2rem 1.5rem !important;
+    text-align: center;
+    height: auto !important;
+    min-height: 100vh;
+  }
+  .tech-image-wrapper, .pets-image-wrapper, .bio-image-wrapper, .beauty-image-wrapper, .edu-image-wrapper {
+    margin-top: 2rem !important;
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+  }
+  .tech-image, .pets-image, .bio-image, .beauty-image, .edu-image {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  .tech-hero-content, .pets-content, .bio-content, .beauty-content, .edu-content {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    text-align: center !important;
+    align-items: center !important;
+    display: flex;
+    flex-direction: column;
+  }
   .fashion-hero-title { font-size: 3rem !important; }
   .tech-hero-title { font-size: 3rem !important; }
   .bio-hero-title { font-size: 3rem !important; }
@@ -235,6 +262,8 @@ a {
   /* Grids */
   .product-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2rem !important; }
   .features-grid { grid-template-columns: 1fr; gap: 2rem; margin-top: 2rem !important; }
+  .themes-grid { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+
   
   /* Product Cards */
   .product-info { padding: 1rem; }
