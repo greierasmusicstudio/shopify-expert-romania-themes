@@ -1,30 +1,13 @@
 // --- PREMIUM ANIMATIONS & INTERACTIONS V2 ---
 
 document.addEventListener('DOMContentLoaded', () => {
-  initLenisSmoothScroll();
   initPageTransitions();
-  initCustomCursor();
   initScrollReveals();
   init3DTilt();
-  initMagneticElements();
   initParallax();
 });
 
-// 1. Lenis Smooth Scrolling (Auto-injected)
-function initLenisSmoothScroll() {
-  if (window.innerWidth <= 768) return; // Optional: disable on mobile for native feel
-  const script = document.createElement('script');
-  script.src = "https://unpkg.com/lenis@1.1.2/dist/lenis.min.js";
-  script.onload = () => {
-    const lenis = new Lenis({
-      autoRaf: true,
-      lerp: 0.08, // smoothness
-      smoothWheel: true
-    });
-  };
-  document.head.appendChild(script);
-}
-
+// Lenis Smooth Scrolling removed per user request
 // 2. Page Transitions (Preloader)
 function initPageTransitions() {
   if (!document.querySelector('.preloader')) {
@@ -55,69 +38,7 @@ function initPageTransitions() {
   });
 }
 
-// 3. Custom Premium Cursor & Magnetic Snap
-function initCustomCursor() {
-  if (window.innerWidth <= 768) return;
-
-  const cursor = document.createElement('div');
-  cursor.className = 'custom-cursor';
-  const follower = document.createElement('div');
-  follower.className = 'cursor-follower';
-  
-  document.body.appendChild(cursor);
-  document.body.appendChild(follower);
-
-  let mouseX = 0, mouseY = 0;
-  let followerX = 0, followerY = 0;
-
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    cursor.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
-  });
-
-  function render() {
-    followerX += (mouseX - followerX) * 0.15;
-    followerY += (mouseY - followerY) * 0.15;
-    follower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0)`;
-    requestAnimationFrame(render);
-  }
-  requestAnimationFrame(render);
-
-  const hoverElements = document.querySelectorAll('a, button, .product-card, input[type="range"]');
-  hoverElements.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      follower.classList.add('cursor-hover');
-      cursor.classList.add('cursor-hover-point');
-    });
-    el.addEventListener('mouseleave', () => {
-      follower.classList.remove('cursor-hover');
-      cursor.classList.remove('cursor-hover-point');
-    });
-  });
-}
-
-// 4. Magnetic Elements (Buttons)
-function initMagneticElements() {
-  if (window.innerWidth <= 768) return;
-  const magnets = document.querySelectorAll('.hub-btn, .theme-btn, .product-btn, .buy-btn, .cart-btn, .fashion-btn, .tech-btn');
-  magnets.forEach(el => {
-    el.addEventListener('mousemove', (e) => {
-      const rect = el.getBoundingClientRect();
-      const h = rect.width / 2;
-      const v = rect.height / 2;
-      const x = e.clientX - rect.left - h;
-      const y = e.clientY - rect.top - v;
-      el.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
-      el.style.transition = 'none';
-    });
-    el.addEventListener('mouseleave', () => {
-      el.style.transform = `translate(0px, 0px)`;
-      el.style.transition = 'transform 0.3s ease-out';
-    });
-  });
-}
-
+// Custom cursor and magnetic elements removed per user request
 // 5. Advanced Scroll Reveals & Text Reveals
 function initScrollReveals() {
   const revealElements = document.querySelectorAll('.product-card, .feature-item, .cta-section, .hero-content, .hero-image-wrapper, .beauty-content, .beauty-image-wrapper, .theme-card, .animate-on-scroll');
