@@ -7,9 +7,12 @@
   <link rel="stylesheet" href="/style.css">
   <style>
     .hub-body {
-      background-image: url('/assets/hub_bg_expert.png');
-      background-size: cover;
-      background-position: center;
+      background: #000000;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(0, 128, 96, 0.2) 0%, transparent 35%),
+        radial-gradient(circle at 90% 80%, rgba(149, 191, 71, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(0, 60, 40, 0.1) 0%, transparent 60%),
+        linear-gradient(135deg, #050505 0%, #0a140f 100%);
       background-attachment: fixed;
       min-height: 100vh;
       display: flex;
@@ -21,7 +24,8 @@
     .hub-overlay {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.4);
+      background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.6) 100%);
+      pointer-events: none;
       z-index: 0;
     }
 
@@ -213,29 +217,6 @@
       </div>
     </a>
   </main>
-
-  <div class="marquee-container animate-on-scroll">
-    <div class="marquee-content">
-      <span>PERFORMANȚĂ</span>
-      <span>CALITATE PREMIUM</span>
-      <span>DESIGN EXCLUSIVIST</span>
-      <span>SUPORT 24/7</span>
-      <span>RETUR SIMPLIFICAT</span>
-      <span>GARANȚIE 100%</span>
-      <span>PERFORMANȚĂ</span>
-      <span>CALITATE PREMIUM</span>
-      <span>DESIGN EXCLUSIVIST</span>
-      <span>SUPORT 24/7</span>
-      <span>RETUR SIMPLIFICAT</span>
-      <span>GARANȚIE 100%</span>
-    </div>
-  </div>
-
-  <section class="cta-section animate-on-scroll">
-    <h2 class="cta-title">Vrei un magazin Shopify Premium?</h2>
-    <p class="cta-desc">Transformăm ideile în experiențe e-commerce de succes. Contactează echipa Shopify Expert Romania pentru a discuta despre proiectul tău.</p>
-    <a href="#" class="fashion-btn" style="border: 1px solid #fff; padding: 1rem 3rem; text-transform: uppercase; letter-spacing: 0.1em; transition: 0.3s; display: inline-block;">Contactează-ne</a>
-  </section>
 
   <script src="/main.js"></script>
 </body>
