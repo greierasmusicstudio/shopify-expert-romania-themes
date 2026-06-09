@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Theme Showcase Hub</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .hub-body {
+      background-image: url('/assets/hub_bg_expert.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 4rem 2rem;
+    }
+    
+    .hub-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 0;
+    }
+
+    .hub-header {
+      z-index: 1;
+      text-align: center;
+      margin-bottom: 4rem;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .hub-header h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #fff, #a3a3a3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hub-header p {
+      font-size: 1.25rem;
+      color: #ccc;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .themes-grid {
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .theme-card {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      box-shadow: var(--glass-shadow);
+      transition: all var(--transition-smooth);
+      cursor: pointer;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      height: 400px;
+      transform: translateY(0);
+    }
+
+    .theme-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+
+    .theme-image-container {
+      width: 100%;
+      height: 70%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .theme-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-slow);
+    }
+
+    .theme-card:hover .theme-image {
+      transform: scale(1.1);
+    }
+    
+    .theme-image-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.8) 100%);
+    }
+
+    .theme-content {
+      padding: 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .theme-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .theme-desc {
+      font-size: 0.95rem;
+      color: #aaa;
+    }
+
+    /* Staggered animations */
+    .theme-card { opacity: 0; animation: fadeIn 0.8s forwards; }
+    .theme-card:nth-child(1) { animation-delay: 0.1s; }
+    .theme-card:nth-child(2) { animation-delay: 0.2s; }
+    .theme-card:nth-child(3) { animation-delay: 0.3s; }
+    .theme-card:nth-child(4) { animation-delay: 0.4s; }
+    .theme-card:nth-child(5) { animation-delay: 0.5s; }
+    .theme-card:nth-child(6) { animation-delay: 0.6s; }
+
+  </style>
+</head>
+<body class="hub-body">
+  <div class="hub-overlay"></div>
+  
+  <header class="hub-header">
+    <h1>Shopify Expert Romania</h1>
+    <p>Aurore Experiences: Explorați o colecție exclusivistă de interfețe premium, concepute pentru a aduce la viață branduri de lux prin performanță, estetică și interactivitate la standarde Shopify Plus.</p>
+  </header>
+
+  <main class="themes-grid">
+    <a href="/fashion/" class="theme-card">
+      <div class="theme-image-container">
+        <img src="/assets/fashion_hero.png" alt="Fashion Theme" class="theme-image">
+        <div class="theme-image-overlay"></div>
+      </div>
+      <div class="theme-content">
+        <h2 class="theme-title">Aurore Fashion</h2>
+        <p class="theme-desc">Minimalism rafinat și contrast înalt pentru branduri haute couture.</p>
+      </div>
+    </a>
+
+    <a href="/electronics/" class="theme-card">
+      <div class="theme-image-container">
+        <img src="/assets/electronics_hero.png" alt="Electronics Theme" class="theme-image">
+        <div class="theme-image-overlay"></div>
+      </div>
+      <div class="theme-content">
+        <h2 class="theme-title">Aura Tech</h2>
+        <p class="theme-desc">Design cibernetic, accente neon și interacțiuni 3D inovatoare.</p>
+      </div>
+    </a>
+
+    <a href="/bio/" class="theme-card">
+      <div class="theme-image-container">
+        <img src="/assets/bio_hero.png" alt="Bio & Naturist Theme" class="theme-image">
+        <div class="theme-image-overlay"></div>
+      </div>
+      <div class="theme-content">
+        <h2 class="theme-title">Botanica Bio</h2>
+        <p class="theme-desc">Estetică organică, tonuri de pământ și o senzație de calm pur.</p>
+      </div>
+    </a>
+
+    <a href="/pets/" class="theme-card">
+      <div class="theme-image-container">
+        <img src="/assets/pets_hero.png" alt="Pet Supplies Theme" class="theme-image">
+        <div class="theme-image-overlay"></div>
+      </div>
+      <div class="theme-content">
+        <h2 class="theme-title">Joyful Pets</h2>
+        <p class="theme-desc">Vibrant, vesel și primitor, perfect pentru prietenii noștri blănoși.</p>
+      </div>
+    </a>
+
+    <a href="/beauty/" class="theme-card">
+      <div class="theme-image-container">
+        <img src="/assets/beauty_hero.png" alt="Beauty Theme" class="theme-image">
+        <div class="theme-image-overlay"></div>
+      </div>
+      <div class="theme-content">
+        <h2 class="theme-title">Lumière Beauty</h2>
+        <p class="theme-desc">Eleganță pastelată, gradiente moi și un aer de lux atemporal.</p>
+      </div>
+    </a>
+
+    <a href="/education/" class="theme-card">
+      <div class="theme-image-container">
+        <img src="/assets/education_hero.png" alt="Education Theme" class="theme-image">
+        <div class="theme-image-overlay"></div>
+      </div>
+      <div class="theme-content">
+        <h2 class="theme-title">EduPremier</h2>
+        <p class="theme-desc">Claritate, structură și o experiență de învățare fără distracții.</p>
+      </div>
+    </a>
+  </main>
+
+  <section class="cta-section animate-on-scroll">
+    <h2 class="cta-title">Vrei un magazin Shopify Premium?</h2>
+    <p class="cta-desc">Transformăm ideile în experiențe e-commerce de succes. Contactează echipa Shopify Expert Romania pentru a discuta despre proiectul tău.</p>
+    <a href="#" class="fashion-btn" style="border: 1px solid #fff; padding: 1rem 3rem; text-transform: uppercase; letter-spacing: 0.1em; transition: 0.3s; display: inline-block;">Contactează-ne</a>
+  </section>
+
+  <script src="/main.js"></script>
+</body>
+</html>

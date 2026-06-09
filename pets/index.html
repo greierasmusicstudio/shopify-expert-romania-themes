@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joyful Pets | Pet Supplies</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    body {
+      background-color: #fffaf0;
+      color: #333;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .pets-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 1.5rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: #ffb067;
+      border-bottom: 4px solid #ff9933;
+      color: #fff;
+    }
+
+    .pets-logo {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      text-transform: capitalize;
+    }
+
+    .pets-menu {
+      display: flex;
+      gap: 2rem;
+      font-weight: 600;
+    }
+
+    .pets-menu a {
+      background: rgba(255,255,255,0.2);
+      padding: 0.5rem 1.2rem;
+      border-radius: 20px;
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .pets-menu a:hover {
+      background: #fff;
+      color: #ff9933;
+      transform: scale(1.1) rotate(-3deg);
+    }
+
+    .pets-hero {
+      display: flex;
+      min-height: 100vh;
+      align-items: center;
+      padding: 8rem 4rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* playful background shapes */
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      z-index: 0;
+    }
+    
+    .shape-1 {
+      width: 400px; height: 400px;
+      background: #ffeb99;
+      top: -100px; left: -100px;
+      animation: float-shape 6s ease-in-out infinite;
+    }
+
+    .shape-2 {
+      width: 300px; height: 300px;
+      background: #b3e6ff;
+      bottom: 50px; right: -50px;
+      animation: float-shape 8s ease-in-out infinite reverse;
+    }
+
+    @keyframes float-shape {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(30px, 30px) scale(1.05); }
+      100% { transform: translate(0, 0) scale(1); }
+    }
+
+    .pets-content {
+      flex: 1;
+      padding-right: 4rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pets-title {
+      font-size: 4.5rem;
+      font-weight: 800;
+      color: #ff7043;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      text-shadow: 3px 3px 0px #ffe0b2;
+    }
+
+    .pets-desc {
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: #666;
+      margin-bottom: 2.5rem;
+      max-width: 500px;
+    }
+
+    .pets-btn {
+      display: inline-block;
+      padding: 1.2rem 3rem;
+      background-color: #4fc3f7;
+      color: #fff;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      box-shadow: 0 8px 0 #29b6f6;
+      transition: all 0.2s;
+    }
+
+    .pets-btn:hover {
+      transform: translateY(4px);
+      box-shadow: 0 4px 0 #29b6f6;
+    }
+    
+    .pets-btn:active {
+      transform: translateY(8px);
+      box-shadow: 0 0 0 #29b6f6;
+    }
+
+    .pets-image-wrapper {
+      flex: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pets-image {
+      width: 100%;
+      border-radius: 40px;
+      border: 8px solid #fff;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      transform: rotate(3deg);
+      transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .pets-image:hover {
+      transform: rotate(0deg) scale(1.05);
+    }
+    
+    .back-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 999;
+      background: #ff7043;
+      color: #fff;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 0 #e64a19;
+      transition: all 0.2s;
+    }
+    .back-btn:hover {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 #e64a19;
+    }
+    .back-btn:active {
+      transform: translateY(4px);
+      box-shadow: 0 0 0 #e64a19;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+
+  <a href="/" class="back-btn">← Back to Hub</a>
+
+  <nav class="pets-nav animate-fade-in">
+    <div class="pets-logo">Joyful Pets</div>
+    <div class="pets-menu">
+      <a href="#">Dogs</a>
+      <a href="#">Cats</a>
+      <a href="#">Toys</a>
+      <a href="#">Food</a>
+    </div>
+  </nav>
+
+  <main class="pets-hero">
+    <div class="pets-content animate-fade-in">
+      <h1 class="pets-title">Happy Pets,<br>Happy Life!</h1>
+      <p class="pets-desc">Discover premium, safe, and fun accessories for your furry best friends. Because they deserve the best.</p>
+      <a href="#" class="pets-btn">Shop Collection</a>
+    </div>
+    
+    <div class="pets-image-wrapper animate-fade-in" style="animation-delay: 0.3s;">
+      <img src="/assets/pets_hero.png" alt="Happy Puppy Playing" class="pets-image">
+    </div>
+  </main>
+
+  <section class="animate-on-scroll" style="padding: 6rem 4rem; max-width: 1400px; margin: 0 auto; position: relative; z-index: 1;">
+    <h2 class="pets-title" style="font-size: 3rem; text-align: center; margin-bottom: 1rem;">Noutăți Pufoase</h2>
+    <p class="pets-desc" style="text-align: center; margin: 0 auto 4rem auto;">Cele mai iubite produse de către blănoșii noștri.</p>
+    
+    <div class="product-grid" style="margin-top: 0;">
+      <a href="/product.html?id=pets-1" class="product-card" style="background: #fff; border-color: #ffeb99; border-radius: 30px; box-shadow: 0 10px 20px rgba(255,153,51,0.1);">
+        <div class="product-img-container" style="background: #ffeb99; border-radius: 30px 30px 0 0;">
+          <img src="/assets/pets_prod_1.png" onerror="this.onerror=null; this.src='https://placehold.co/800x1000/ffb067/FFFFFF?text=Pet+Product+1';" alt="Dog Bed" class="product-img">
+        </div>
+        <div class="product-info" style="color: #333;">
+          <h3 class="product-title" style="color: #ff7043; font-weight: 700;">Orthopedic Dog Bed</h3>
+          <span class="product-price" style="font-weight: 600;">345 RON</span>
+        </div>
+      </a>
+      <a href="/product.html?id=pets-2" class="product-card" style="background: #fff; border-color: #ffeb99; border-radius: 30px; box-shadow: 0 10px 20px rgba(255,153,51,0.1);">
+        <div class="product-img-container" style="background: #ffeb99; border-radius: 30px 30px 0 0;">
+          <img src="/assets/pets_prod_2.png" onerror="this.onerror=null; this.src='https://placehold.co/800x1000/ff9933/FFFFFF?text=Pet+Product+2';" alt="Pet Feeder" class="product-img">
+        </div>
+        <div class="product-info" style="color: #333;">
+          <h3 class="product-title" style="color: #ff7043; font-weight: 700;">Elevated Ceramic Feeder</h3>
+          <span class="product-price" style="font-weight: 600;">180 RON</span>
+        </div>
+      </a>
+      <a href="/product.html?id=pets-3" class="product-card" style="background: #fff; border-color: #ffeb99; border-radius: 30px; box-shadow: 0 10px 20px rgba(255,153,51,0.1);">
+        <div class="product-img-container" style="background: #ffeb99; border-radius: 30px 30px 0 0;">
+          <img src="/assets/pets_prod_3.png" onerror="this.onerror=null; this.src='https://placehold.co/800x1000/ff7043/FFFFFF?text=Pet+Product+3';" alt="Smart Toy" class="product-img">
+        </div>
+        <div class="product-info" style="color: #333;">
+          <h3 class="product-title" style="color: #ff7043; font-weight: 700;">Interactive Smart Toy</h3>
+          <span class="product-price" style="font-weight: 600;">220 RON</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="animate-on-scroll" style="padding: 4rem 4rem; max-width: 1400px; margin: 0 auto; position: relative; z-index: 1;">
+    <h2 class="pets-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 4rem;">De ce Joyful Pets?</h2>
+    <div class="features-grid" style="color: #333;">
+      <div class="feature-item" style="background: #fff; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
+        <div class="feature-icon" style="color: #ff7043;">🐾</div>
+        <h3 class="feature-title" style="font-weight: 700;">Design Jucăuș</h3>
+        <p class="feature-desc" style="color: #666;">O interfață plină de viață, culori vibrante și micro-interacțiuni care aduc zâmbete.</p>
+      </div>
+      <div class="feature-item" style="background: #fff; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
+        <div class="feature-icon" style="color: #4fc3f7;">🦴</div>
+        <h3 class="feature-title" style="font-weight: 700;">Navigare Ușoară</h3>
+        <p class="feature-desc" style="color: #666;">Categorii vizuale clare pentru câini, pisici și alte animale de companie.</p>
+      </div>
+      <div class="feature-item" style="background: #fff; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
+        <div class="feature-icon" style="color: #ffb067;">💖</div>
+        <h3 class="feature-title" style="font-weight: 700;">Comunitate</h3>
+        <p class="feature-desc" style="color: #666;">Secțiuni integrate pentru recenzii cu poze și blog-uri pentru iubitorii de animale.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section animate-on-scroll" style="background: #ffeb99; border: none; margin-top: 4rem; position: relative; z-index: 1;">
+    <h2 class="pets-title" style="font-size: 3rem;">Iubești Animalele?</h2>
+    <p class="pets-desc" style="margin: 0 auto 3rem auto;">Deschide-ți propriul pet shop online cu cea mai prietenoasă temă de la Shopify Expert Romania.</p>
+    <a href="/" class="pets-btn">Contact Shopify Expert</a>
+  </section>
+
+  <script src="/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduPremier | Online Learning Platform</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    body {
+      background-color: #f0f4f8;
+      color: #334155;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .edu-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 1rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: #ffffff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .edu-logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #2563eb;
+      letter-spacing: -0.02em;
+    }
+
+    .edu-menu {
+      display: flex;
+      gap: 2.5rem;
+      font-weight: 500;
+      align-items: center;
+    }
+
+    .edu-menu a {
+      color: #64748b;
+      transition: color 0.2s;
+    }
+
+    .edu-menu a:hover {
+      color: #2563eb;
+    }
+
+    .edu-btn-nav {
+      background: #2563eb;
+      color: #fff !important;
+      padding: 0.6rem 1.5rem;
+      border-radius: 6px;
+    }
+    
+    .edu-btn-nav:hover {
+      background: #1d4ed8;
+    }
+
+    .edu-hero {
+      display: flex;
+      min-height: 100vh;
+      align-items: center;
+      padding: 7rem 4rem 4rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .edu-content {
+      flex: 1;
+      padding-right: 3rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      background: #dbeafe;
+      color: #1e40af;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .edu-title {
+      font-size: 4rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      color: #0f172a;
+      letter-spacing: -0.03em;
+    }
+
+    .edu-title span {
+      color: #2563eb;
+    }
+
+    .edu-desc {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: #64748b;
+      margin-bottom: 2.5rem;
+      max-width: 500px;
+    }
+
+    .edu-btn-group {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .edu-btn-primary {
+      padding: 1rem 2rem;
+      background: #2563eb;
+      color: #fff;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: all 0.2s;
+      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+    }
+
+    .edu-btn-primary:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+      box-shadow: 0 15px 25px rgba(37, 99, 235, 0.3);
+    }
+
+    .edu-btn-secondary {
+      padding: 1rem 2rem;
+      background: #fff;
+      color: #334155;
+      font-weight: 600;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      transition: all 0.2s;
+    }
+
+    .edu-btn-secondary:hover {
+      background: #f8fafc;
+      border-color: #94a3b8;
+    }
+
+    .edu-image-wrapper {
+      flex: 1.2;
+      position: relative;
+    }
+
+    .edu-image-bg {
+      position: absolute;
+      top: -20px; left: -20px; right: 20px; bottom: -20px;
+      background: #dbeafe;
+      border-radius: 20px;
+      z-index: 0;
+      transform: rotate(-3deg);
+    }
+
+    .edu-image {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    .stats-card {
+      position: absolute;
+      bottom: -30px; left: -30px;
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      animation: bounce 4s infinite;
+    }
+
+    .stats-icon {
+      width: 48px; height: 48px;
+      background: #f0fdf4;
+      color: #16a34a;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .back-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 999;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      color: #475569;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s ease;
+    }
+    .back-btn:hover {
+      background: #f8fafc;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+  <a href="/" class="back-btn">← Back to Hub</a>
+
+  <nav class="edu-nav animate-fade-in">
+    <div class="edu-logo">EduPremier</div>
+    <div class="edu-menu">
+      <a href="#">Courses</a>
+      <a href="#">Pricing</a>
+      <a href="#">Enterprise</a>
+      <a href="#" class="edu-btn-nav">Start Free Trial</a>
+    </div>
+  </nav>
+
+  <main class="edu-hero">
+    <div class="edu-content animate-fade-in">
+      <div class="badge">New: Advanced UI/UX Course</div>
+      <h1 class="edu-title">Master the skills of <span>tomorrow.</span></h1>
+      <p class="edu-desc">Join over 100,000 students learning from industry experts. Get unlimited access to premium courses, interactive labs, and professional certificates.</p>
+      <div class="edu-btn-group">
+        <a href="#" class="edu-btn-primary">Explore Courses</a>
+        <a href="#" class="edu-btn-secondary">View Syllabus</a>
+      </div>
+    </div>
+    
+    <div class="edu-image-wrapper animate-fade-in" style="animation-delay: 0.3s;">
+      <div class="edu-image-bg"></div>
+      <img src="/assets/education_hero.png" alt="Student Dashboard" class="edu-image">
+      
+      <div class="stats-card">
+        <div class="stats-icon">✓</div>
+        <div>
+          <div style="font-weight: 700; color: #0f172a; font-size: 1.2rem;">98%</div>
+          <div style="color: #64748b; font-size: 0.9rem;">Completion Rate</div>
+        </div>
+      </div>
+  </main>
+
+  <section class="animate-on-scroll" style="padding: 6rem 4rem; max-width: 1400px; margin: 0 auto;">
+    <h2 class="edu-title" style="font-size: 3rem; text-align: center; margin-bottom: 1rem;">Cursuri de Top</h2>
+    <p class="edu-desc" style="text-align: center; margin: 0 auto 4rem auto;">Alege din programele noastre de formare acreditate, dezvoltate alături de lideri din industrie.</p>
+    
+    <div class="product-grid" style="margin-top: 0; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+      <a href="/product.html?id=education-1" class="product-card" style="background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+        <div class="product-img-container" style="background: #dbeafe; aspect-ratio: 16/9; border-radius: 12px 12px 0 0;">
+          <img src="/assets/education_prod_1.png" onerror="this.onerror=null; this.src='https://placehold.co/800x600/dbeafe/2563eb?text=Course+1';" alt="Web Development" class="product-img">
+        </div>
+        <div class="product-info" style="color: #334155; padding: 2rem;">
+          <h3 class="product-title" style="font-size: 1.4rem; color: #0f172a; margin-bottom: 0.5rem; font-weight: 700;">Full-Stack Web Development</h3>
+          <p style="font-size: 0.95rem; color: #64748b; margin-bottom: 1.5rem;">Învață React, Node.js și arhitectura cloud.</p>
+          <span class="product-price" style="font-weight: 700; color: #2563eb;">299 RON / lună</span>
+        </div>
+      </a>
+      <a href="/product.html?id=education-2" class="product-card" style="background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+        <div class="product-img-container" style="background: #dbeafe; aspect-ratio: 16/9; border-radius: 12px 12px 0 0;">
+          <img src="/assets/education_prod_2.png" onerror="this.onerror=null; this.src='https://placehold.co/800x600/dbeafe/2563eb?text=Course+2';" alt="UX/UI Design" class="product-img">
+        </div>
+        <div class="product-info" style="color: #334155; padding: 2rem;">
+          <h3 class="product-title" style="font-size: 1.4rem; color: #0f172a; margin-bottom: 0.5rem; font-weight: 700;">Advanced UI/UX Design</h3>
+          <p style="font-size: 0.95rem; color: #64748b; margin-bottom: 1.5rem;">Psihologia culorilor, tipografie și Figma.</p>
+          <span class="product-price" style="font-weight: 700; color: #2563eb;">199 RON / lună</span>
+        </div>
+      </a>
+      <a href="/product.html?id=education-3" class="product-card" style="background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+        <div class="product-img-container" style="background: #dbeafe; aspect-ratio: 16/9; border-radius: 12px 12px 0 0;">
+          <img src="/assets/education_prod_3.png" onerror="this.onerror=null; this.src='https://placehold.co/800x600/dbeafe/2563eb?text=Course+3';" alt="Data Science" class="product-img">
+        </div>
+        <div class="product-info" style="color: #334155; padding: 2rem;">
+          <h3 class="product-title" style="font-size: 1.4rem; color: #0f172a; margin-bottom: 0.5rem; font-weight: 700;">Data Science & AI</h3>
+          <p style="font-size: 0.95rem; color: #64748b; margin-bottom: 1.5rem;">Python, Machine Learning și analiză predictivă.</p>
+          <span class="product-price" style="font-weight: 700; color: #2563eb;">349 RON / lună</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="animate-on-scroll" style="padding: 4rem 4rem; max-width: 1400px; margin: 0 auto;">
+    <h2 class="edu-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 4rem;">De ce EduPremier?</h2>
+    <div class="features-grid" style="color: #334155;">
+      <div class="feature-item" style="background: #fff; padding: 2rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <div class="feature-icon" style="color: #2563eb; background: #dbeafe; width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font-size: 1.8rem;">🎓</div>
+        <h3 class="feature-title" style="font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem;">Certificări Recunoscute</h3>
+        <p class="feature-desc">Integrare cu sisteme de generare a diplomelor și profile de studenți complet echipate.</p>
+      </div>
+      <div class="feature-item" style="background: #fff; padding: 2rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <div class="feature-icon" style="color: #2563eb; background: #dbeafe; width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font-size: 1.8rem;">▶️</div>
+        <h3 class="feature-title" style="font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem;">Player Video Dedicat</h3>
+        <p class="feature-desc">Suport avansat pentru streaming video fără întreruperi, cu opțiuni de subtitrări și notițe.</p>
+      </div>
+      <div class="feature-item" style="background: #fff; padding: 2rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <div class="feature-icon" style="color: #2563eb; background: #dbeafe; width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font-size: 1.8rem;">📊</div>
+        <h3 class="feature-title" style="font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem;">Gamificare</h3>
+        <p class="feature-desc">Puncte, insigne și progresie vizuală pentru a menține studenții motivați.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section animate-on-scroll" style="background: #2563eb; border: none; margin-top: 4rem; color: #fff;">
+    <h2 class="edu-title" style="font-size: 3rem; color: #fff;">Transformă Educația</h2>
+    <p class="edu-desc" style="margin: 0 auto 3rem auto; color: #dbeafe;">Construiește propria academie online cu această temă avansată creată de Shopify Expert Romania.</p>
+    <a href="/" class="edu-btn-secondary" style="border: none;">Cere o Ofertă</a>
+  </section>
+
+  <script src="/main.js"></script>
+</body>
+</html>

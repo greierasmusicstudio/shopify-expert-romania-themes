@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalii Produs | Shopify Expert Romania</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    /* Default variables that will be overridden by theme classes */
+    :root {
+      --theme-primary: #000000;
+      --theme-primary-hover: #333333;
+      --theme-bg: #ffffff;
+      --theme-text: #111111;
+      --theme-text-muted: #666666;
+      --theme-accent: #eae6df;
+      --theme-border: #e5e5e5;
+      --theme-radius: 8px;
+      --theme-font: 'Outfit', sans-serif;
+      --theme-font-title: 'Outfit', sans-serif;
+    }
+
+    /* --- THEME STYLING ADJUSTMENTS BASED ON CATEGORY --- */
+    
+    /* FASHION THEME: Ultra minimal, high-contrast, elegant */
+    body.theme-fashion {
+      --theme-primary: #000000;
+      --theme-primary-hover: #222222;
+      --theme-bg: #ffffff;
+      --theme-text: #111111;
+      --theme-text-muted: #777777;
+      --theme-accent: #f8f8f8;
+      --theme-border: #e2e2e2;
+      --theme-radius: 0px; /* Sharp corners for high fashion */
+      --theme-font: 'Outfit', sans-serif;
+      --theme-font-title: 'Outfit', sans-serif;
+      background-color: var(--theme-bg);
+      color: var(--theme-text);
+    }
+
+    /* ELECTRONICS THEME: Tech, dark mode, glowing accents, rounded cards */
+    body.theme-electronics {
+      --theme-primary: #00f0ff;
+      --theme-primary-hover: #00c8d8;
+      --theme-bg: #050505;
+      --theme-text: #ffffff;
+      --theme-text-muted: #aaaaaa;
+      --theme-accent: #111111;
+      --theme-border: #222222;
+      --theme-radius: 6px;
+      --theme-font: 'Inter', sans-serif;
+      --theme-font-title: 'Outfit', sans-serif;
+      background-color: var(--theme-bg);
+      color: var(--theme-text);
+    /* BIO THEME: Organic, warm sage green, cream backgrounds, heavily rounded */
+    body.theme-bio {
+      --theme-primary: #6a7c64;
+      --theme-primary-hover: #566750;
+      --theme-bg: #fdfcf7;
+      --theme-text: #3b4238;
+      --theme-text-muted: #5d635a;
+      --theme-accent: #e3dec9;
+      --theme-border: #e6e2d1;
+      --theme-radius: 20px;
+      --theme-font: 'Inter', sans-serif;
+      --theme-font-title: 'Outfit', sans-serif;
+      background-color: var(--theme-bg);
+      color: var(--theme-text);
+    }
+
+    /* PETS THEME: Playful, bold orange/yellow, bubble gum curves, fun shadow */
+    body.theme-pets {
+      --theme-primary: #ff7043;
+      --theme-primary-hover: #ff5722;
+      --theme-bg: #fffaf0;
+      --theme-text: #333333;
+      --theme-text-muted: #666666;
+      --theme-accent: #ffeb99;
+      --theme-border: #ffd1a4;
+      --theme-radius: 35px;
+      --theme-font: 'Outfit', sans-serif;
+      --theme-font-title: 'Outfit', sans-serif;
+      background-color: var(--theme-bg);
+      color: var(--theme-text);
+    }
+    body.theme-pets .add-to-cart-btn {
+      background-color: #4fc3f7;
+      box-shadow: 0 4px 0 #29b6f6;
+      border: none;
+    }
+    body.theme-pets .add-to-cart-btn:hover {
+      background-color: #29b6f6;
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 #29b6f6;
+    }
+
+    /* BEAUTY THEME: Luxury, rose gold/beige, elegant serif headers, very clean */
+    body.theme-beauty {
+      --theme-primary: #bd8e83;
+      --theme-primary-hover: #a4766b;
+      --theme-bg: #fcf9f8;
+      --theme-text: #4a403b;
+      --theme-text-muted: #7b6d65;
+      --theme-accent: #fceeea;
+      --theme-border: #f0e6e2;
+      --theme-radius: 0px;
+      --theme-font: 'Outfit', sans-serif;
+      --theme-font-title: 'Playfair Display', serif;
+      background-color: var(--theme-bg);
+      color: var(--theme-text);
+    }
+
+    /* EDUCATION THEME: SaaS, modern tech blue, structured cards */
+    body.theme-education {
+      --theme-primary: #2563eb;
+      --theme-primary-hover: #1d4ed8;
+      --theme-bg: #f8fafc;
+      --theme-text: #334155;
+      --theme-text-muted: #64748b;
+      --theme-accent: #dbeafe;
+      --theme-border: #cbd5e1;
+      --theme-radius: 10px;
+      --theme-font: 'Inter', sans-serif;
+      --theme-font-title: 'Inter', sans-serif;
+      background-color: var(--theme-bg);
+      color: var(--theme-text);
+    }
+
+    /* --- CORE PRODUCT PAGE STYLING --- */
+    body {
+      font-family: var(--theme-font);
+      transition: background-color 0.3s, color 0.3s;
+      margin: 0;
+      padding: 0;
+    }
+
+    .product-wrapper {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 10rem 4rem 6rem 4rem;
+    }
+
+    /* Breadcrumbs */
+    .breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--theme-text-muted);
+      margin-bottom: 3rem;
+    }
+    .breadcrumbs a {
+      transition: color 0.2s;
+    }
+    .breadcrumbs a:hover {
+      color: var(--theme-primary);
+    }
+    .breadcrumbs span {
+      font-weight: 500;
+      color: var(--theme-text);
+    }
+
+    /* Two Column Layout */
+    .product-details-container {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    @media (max-width: 968px) {
+      .product-details-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      .product-wrapper {
+        padding: 8rem 2rem 4rem 2rem;
+      }
+    }
+
+    /* Left Column: Image Gallery */
+    .gallery-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      position: sticky;
+      top: 8rem;
+    }
+    .main-image-wrapper {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: var(--theme-accent);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--theme-radius);
+      overflow: hidden;
+      position: relative;
+    }
+    body.theme-education .main-image-wrapper {
+      aspect-ratio: 16/10; /* Landscape aspect ratio for course mockups */
+    }
+    .main-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .main-image-wrapper:hover img {
+      transform: scale(1.03);
+    }
+    
+    .thumbnails-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    .thumbnail-card {
+      aspect-ratio: 1fr;
+      background: var(--theme-accent);
+      border: 1px solid var(--theme-border);
+      border-radius: calc(var(--theme-radius) / 2);
+      cursor: pointer;
+      overflow: hidden;
+      transition: all 0.3s;
+      opacity: 0.6;
+    }
+    body.theme-education .thumbnail-card {
+      aspect-ratio: 16/10;
+    }
+    .thumbnail-card.active, .thumbnail-card:hover {
+      opacity: 1;
+      border-color: var(--theme-primary);
+    }
+    .thumbnail-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Right Column: Info & Buy Options */
+    .info-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .brand-tag {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--theme-primary);
+      font-weight: 700;
+    }
+
+    .title-display {
+      font-family: var(--theme-font-title);
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0;
+      color: var(--theme-text);
+    }
+    body.theme-beauty .title-display {
+      font-style: italic;
+    }
+
+    /* Reviews Stars Badge */
+    .stars-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+      color: var(--theme-text-muted);
+    }
+    .stars-icon {
+      color: #ffd700;
+      letter-spacing: -0.05em;
+      font-size: 1.1rem;
+    }
+    .reviews-link {
+      text-decoration: underline;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .reviews-link:hover {
+      color: var(--theme-primary);
+    }
+
+    /* Price Section */
+    .price-display {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin-top: 0.5rem;
+    }
+    .current-price {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--theme-primary);
+    }
+    body.theme-pets .current-price {
+      color: #ff7043;
+    }
+    body.theme-education .current-price {
+      color: #2563eb;
+    }
+    .old-price {
+      font-size: 1.4rem;
+      text-decoration: line-through;
+      color: var(--theme-text-muted);
+      opacity: 0.7;
+    }
+    .sale-badge {
+      background: #ff3b30;
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+    body.theme-electronics .sale-badge {
+      background: #7000ff;
+    }
+    body.theme-bio .sale-badge {
+      background: #6a7c64;
+    }
+
+    .short-desc {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: var(--theme-text-muted);
+    }
+
+    /* Selector Groups */
+    .selector-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      border-top: 1px solid var(--theme-border);
+      padding-top: 1.5rem;
+    }
+    .selector-label {
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--theme-text);
+    }
+    .selector-label span {
+      font-weight: 400;
+      color: var(--theme-text-muted);
+      text-transform: none;
+      margin-left: 0.5rem;
+    }
+
+    /* Variant Block Selectors (e.g. Size) */
+    .variant-blocks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+    .variant-block {
+      border: 1px solid var(--theme-border);
+      background: transparent;
+      padding: 0.8rem 1.5rem;
+      border-radius: var(--theme-radius);
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+      color: var(--theme-text);
+    }
+    .variant-block:hover {
+      border-color: var(--theme-text);
+    }
+    .variant-block.active {
+      border-color: var(--theme-primary);
+      background-color: var(--theme-primary);
+      color: var(--theme-bg);
+    }
+    body.theme-electronics .variant-block.active {
+      color: #000;
+    }
+
+    /* Color Swatch Selectors */
+    .color-swatches {
+      display: flex;
+      gap: 1rem;
+    }
+    .color-swatch {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      cursor: pointer;
+      position: relative;
+      border: 2px solid transparent;
+      box-shadow: inset 0 0 0 2px #fff;
+      transition: all 0.3s;
+    }
+    body.theme-electronics .color-swatch {
+      box-shadow: inset 0 0 0 2px #050505;
+    }
+    .color-swatch.active {
+      border-color: var(--theme-primary);
+      transform: scale(1.1);
+    }
+
+    /* Quantity and Purchase Row */
+    .purchase-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 1.5rem;
+      border-top: 1px solid var(--theme-border);
+      padding-top: 1.5rem;
+      margin-top: 1rem;
+    }
+    @media (max-width: 480px) {
+      .purchase-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .qty-selector {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--theme-border);
+      border-radius: var(--theme-radius);
+      overflow: hidden;
+      height: 3.5rem;
+      background: transparent;
+    }
+    .qty-btn {
+      width: 45px;
+      height: 100%;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--theme-text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .qty-btn:hover {
+      background: var(--theme-accent);
+    }
+    .qty-input {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: transparent;
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--theme-text);
+    }
+    .qty-input::-webkit-outer-spin-button,
+    .qty-input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .action-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .buy-btn {
+      height: 3.5rem;
+      border-radius: var(--theme-radius);
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+    .add-to-cart-btn {
+      background: transparent;
+      border: 2px solid var(--theme-primary);
+      color: var(--theme-primary);
+    }
+    .add-to-cart-btn:hover {
+      background: var(--theme-primary);
+      color: var(--theme-bg);
+    }
+    body.theme-electronics .add-to-cart-btn:hover {
+      color: #000;
+    }
+
+    .checkout-now-btn {
+      background: var(--theme-primary);
+      border: none;
+      color: var(--theme-bg);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    }
+    body.theme-electronics .checkout-now-btn {
+      color: #000;
+      box-shadow: 0 10px 25px rgba(0, 240, 255, 0.2);
+    }
+    body.theme-education .checkout-now-btn {
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2);
+    }
+    .checkout-now-btn:hover {
+      background: var(--theme-primary-hover);
+      transform: translateY(-2px);
+    }
+
+    /* Trust Badges */
+    .trust-badges-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      border-top: 1px solid var(--theme-border);
+      padding-top: 1.5rem;
+      margin-top: 1rem;
+    }
+    .trust-badge-item {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--theme-text-muted);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      line-height: 1.3;
+    }
+    .trust-badge-icon {
+      font-size: 1.5rem;
+      color: var(--theme-primary);
+    }
+
+    /* Accordions */
+    .accordions-container {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--theme-border);
+      margin-top: 1rem;
+    }
+    .accordion-item {
+      border-bottom: 1px solid var(--theme-border);
+    }
+    .accordion-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 0;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1.05rem;
+      user-select: none;
+      color: var(--theme-text);
+      transition: color 0.2s;
+    }
+    .accordion-header:hover {
+      color: var(--theme-primary);
+    }
+    .accordion-caret {
+      font-size: 0.8rem;
+      transition: transform 0.3s;
+    }
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out, padding 0.3s;
+      padding-bottom: 0;
+      color: var(--theme-text-muted);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+    .accordion-item.active .accordion-caret {
+      transform: rotate(180deg);
+    }
+    .accordion-item.active .accordion-content {
+      max-height: 500px;
+      padding-bottom: 1.5rem;
+      transition: max-height 0.3s ease-in;
+    }
+    .accordion-specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .accordion-specs-table td {
+      padding: 0.6rem 0;
+      border-bottom: 1px dashed var(--theme-border);
+    }
+    .accordion-specs-table td:first-child {
+      font-weight: 600;
+      width: 40%;
+      color: var(--theme-text);
+    }
+
+    /* --- REVIEW SECTION --- */
+    .reviews-section {
+      border-top: 1px solid var(--theme-border);
+      margin-top: 6rem;
+      padding-top: 6rem;
+    }
+    .reviews-title {
+      font-family: var(--theme-font-title);
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2.5rem;
+    }
+    .review-card {
+      background: var(--theme-accent);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--theme-radius);
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .reviewer-name {
+      font-weight: 700;
+      color: var(--theme-text);
+    }
+    .review-date {
+      font-size: 0.85rem;
+      color: var(--theme-text-muted);
+    }
+    .review-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--theme-text);
+    }
+    .review-comment {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--theme-text-muted);
+    }
+
+    /* --- RECOMMENDATIONS SECTION --- */
+    .recommendations-section {
+      border-top: 1px solid var(--theme-border);
+      margin-top: 6rem;
+      padding-top: 6rem;
+    }
+    .recommendations-title {
+      font-family: var(--theme-font-title);
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    /* Toast Notification */
+    .toast-notification {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translate(-50%, 100px);
+      background: #111111;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #ffffff;
+      padding: 1.2rem 2.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+      z-index: 9999;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .toast-notification.active {
+      transform: translate(-50%, 0);
+      opacity: 1;
+    }
+    .toast-checkout-btn {
+      background: var(--theme-primary);
+      color: var(--theme-bg);
+      border: none;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+    body.theme-electronics .toast-checkout-btn {
+      color: #000;
+    }
+
+    /* Floating navigation bar for details page */
+    .details-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 1.5rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      border-bottom: 1px solid var(--theme-border);
+      background: var(--theme-bg);
+      opacity: 0.98;
+      backdrop-filter: blur(10px);
+    }
+    @media (max-width: 768px) {
+      .details-nav {
+        padding: 1.5rem 2rem;
+      }
+    }
+    .details-logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      font-family: var(--theme-font-title);
+      color: var(--theme-text);
+    }
+    body.theme-beauty .details-logo {
+      font-weight: 400;
+    }
+    .back-btn-header {
+      background: var(--theme-accent);
+      border: 1px solid var(--theme-border);
+      color: var(--theme-text);
+      padding: 0.6rem 1.2rem;
+      border-radius: var(--theme-radius);
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: all 0.3s;
+    }
+    .back-btn-header:hover {
+      background: var(--theme-primary);
+      color: var(--theme-bg);
+      border-color: var(--theme-primary);
+    }
+    body.theme-electronics .back-btn-header:hover {
+      color: #000;
+    }
+
+    /* simulated reviews content helper */
+    .badge-certified {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.75rem;
+      color: #2e7d32;
+      background: #e8f5e9;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+    body.theme-electronics .badge-certified {
+      color: #00f0ff;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Nav -->
+  <nav class="details-nav">
+    <div class="details-logo" id="logo-display">Shopify Expert</div>
+    <a href="#" id="back-link" class="back-btn-header">← Înapoi la Magazin</a>
+  </nav>
+
+  <div class="product-wrapper">
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+      <a href="/">Hub Principal</a>
+      <span>/</span>
+      <a href="#" id="crumb-category">Categorie</a>
+      <span>/</span>
+      <span id="crumb-product">Nume Produs</span>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="product-details-container animate-fade-in">
+      
+      <!-- Left Column: Gallery -->
+      <div class="gallery-container">
+        <div class="main-image-wrapper">
+          <img id="main-product-image" src="" alt="Main Product Preview">
+        </div>
+        <div class="thumbnails-grid" id="thumbnails-container">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- Right Column: Product Configurator -->
+      <div class="info-container">
+        <div class="brand-tag" id="brand-badge">PRODUS PREMIUM</div>
+        <h1 class="title-display" id="product-title-display">Product Title</h1>
+        
+        <div class="stars-badge">
+          <span class="stars-icon">★ ★ ★ ★ ★</span>
+          <span id="product-rating">4.9/5</span>
+          <span>•</span>
+          <span class="reviews-link" id="reviews-anchor">128 recenzii verified</span>
+        </div>
+
+        <div class="price-display">
+          <span class="current-price" id="price-display-val">1.290 RON</span>
+          <span class="old-price" id="old-price-val">1.590 RON</span>
+          <span class="sale-badge">Redus</span>
+        </div>
+
+        <p class="short-desc" id="product-desc-display">Short product description text placeholder.</p>
+
+        <!-- Variants Block (e.g. Size / Options) -->
+        <div class="selector-group" id="variants-selector-wrapper">
+          <div class="selector-label"><span id="variants-label-name">Opțiuni</span>: <span id="selected-variant-display">-</span></div>
+          <div class="variant-blocks" id="variants-container">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Color Swatch Group -->
+        <div class="selector-group" id="colors-selector-wrapper">
+          <div class="selector-label">Culoare: <span id="selected-color-display">-</span></div>
+          <div class="color-swatches" id="colors-container">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Qty and Buy row -->
+        <div class="purchase-row">
+          <div class="qty-selector">
+            <button class="qty-btn" id="qty-minus">-</button>
+            <input type="number" class="qty-input" id="qty-val" value="1" min="1">
+            <button class="qty-btn" id="qty-plus">+</button>
+          </div>
+          <div class="action-buttons">
+            <button class="buy-btn add-to-cart-btn" id="add-to-cart-trigger">Adaugă în Coș</button>
+            <button class="buy-btn checkout-now-btn" id="buy-now-trigger">Cumpără Acum</button>
+          </div>
+        </div>
+
+        <!-- Shopify style trust badges -->
+        <div class="trust-badges-grid">
+          <div class="trust-badge-item">
+            <span class="trust-badge-icon">🚚</span>
+            <strong>Livrare Rapidă</strong>
+            <span>24/48 ore în toată țara</span>
+          </div>
+          <div class="trust-badge-item">
+            <span class="trust-badge-icon">🛡️</span>
+            <strong>Plată Securizată</strong>
+            <span>3D Secure & Ramburs</span>
+          </div>
+          <div class="trust-badge-item">
+            <span class="trust-badge-icon">🔄</span>
+            <strong>Retur Simplu</strong>
+            <span>30 zile garanție retur</span>
+          </div>
+        </div>
+
+        <!-- Details Accordions -->
+        <div class="accordions-container">
+          <div class="accordion-item active">
+            <div class="accordion-header">
+              <span>Descrierea Produsului</span>
+              <span class="accordion-caret">▼</span>
+            </div>
+            <div class="accordion-content" id="long-desc-display">
+              Detailed description...
+            </div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span>Specificații Tehnice & Detalii</span>
+              <span class="accordion-caret">▼</span>
+            </div>
+            <div class="accordion-content">
+              <table class="accordion-specs-table" id="specs-table-display">
+                <!-- Dynamically populated -->
+              </table>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span>Livrare & Politică Retur</span>
+              <span class="accordion-caret">▼</span>
+            </div>
+            <div class="accordion-content">
+              Oferim livrare gratuită pentru comenzi de peste 200 RON. Comenzile plasate până în ora 15:00 sunt predate curierului în aceeași zi. Returul este acoperit integral de noi în termen de 30 de zile dacă produsul este în ambalajul original și nu prezintă urme de uzură.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Review-uri Secțiune -->
+    <section class="reviews-section" id="reviews-container-section">
+      <h2 class="reviews-title">Opinia Clienților Noștri</h2>
+      <div class="reviews-grid" id="reviews-cards-container">
+        <!-- Dynamically populated review cards -->
+      </div>
+    </section>
+
+    <!-- Recomandări Secțiune -->
+    <section class="recommendations-section">
+      <h2 class="recommendations-title">S-ar Putea Să-ți Placă Și...</h2>
+      <div class="product-grid" id="recommendations-grid-container" style="margin-top: 0;">
+        <!-- Dynamically populated products from the same category -->
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Toast Message -->
+  <div class="toast-notification" id="toast-el">
+    <div>🛒 Produs adăugat în coș cu succes!</div>
+    <button class="toast-checkout-btn" onclick="window.location.href='/'">Finalizează</button>
+  </div>
+
+  <script src="/products-data.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Get query params
+      const params = new URLSearchParams(window.location.search);
+      const productId = params.get("id") || "fashion-1";
+
+      // 2. Load product
+      const product = window.productsData ? window.productsData[productId] : null;
+
+      if (!product) {
+        // Show error state inside container
+        document.querySelector(".product-wrapper").innerHTML = `
+          <div style="text-align: center; padding: 6rem 2rem;">
+            <h1 style="font-size: 2.5rem; margin-bottom: 2rem;">Hopa! Produsul nu a fost găsit.</h1>
+            <p style="color: #666; margin-bottom: 3rem;">Produsul cu ID-ul "${productId}" nu există în baza noastră de date demo.</p>
+            <a href="/" class="back-btn-header" style="padding: 1rem 2.5rem; font-size: 1rem;">Înapoi la Hub Principal</a>
+          </div>
+        `;
+        return;
+      }
+
+      // 3. Apply category styling
+      document.body.className = `theme-${product.categorySlug}`;
+
+      // 4. Update texts and contents
+      document.title = `${product.title} | Premium Shopify Demo`;
+      document.getElementById("logo-display").innerText = product.category === "Premium Beauty" ? "Lumière" : (product.category === "Pet Supplies" ? "Joyful Pets" : (product.category === "Online Learning" ? "EduPremier" : "AURA"));
+      
+      const backLink = document.getElementById("back-link");
+      backLink.href = `/${product.categorySlug}/`;
+      backLink.innerText = `← Înapoi la Magazinul ${product.category}`;
+
+      document.getElementById("crumb-category").href = `/${product.categorySlug}/`;
+      document.getElementById("crumb-category").innerText = product.category;
+      document.getElementById("crumb-product").innerText = product.title;
+
+      document.getElementById("brand-badge").innerText = product.categorySlug === "education" ? "CURS ACREDITAT" : "PRODUS DEMO PREMIUM";
+      document.getElementById("product-title-display").innerText = product.title;
+      document.getElementById("product-rating").innerText = `${product.rating}/5.0`;
+      document.getElementById("reviews-anchor").innerText = `${product.reviewsCount} verified`;
+      document.getElementById("price-display-val").innerText = product.price;
+      document.getElementById("old-price-val").innerText = product.oldPrice;
+      document.getElementById("product-desc-display").innerText = product.desc;
+      document.getElementById("long-desc-display").innerHTML = product.longDesc;
+
+      // Render main image
+      const mainImg = document.getElementById("main-product-image");
+      mainImg.src = product.image;
+      mainImg.alt = product.title;
+      mainImg.onerror = () => {
+        let size = product.categorySlug === "education" ? "800x600" : "800x1000";
+        let colors = product.categorySlug === "beauty" ? "fceeea/bd8e83" : (product.categorySlug === "pets" ? "ffb067/FFFFFF" : "dbeafe/2563eb");
+        mainImg.src = `https://placehold.co/${size}/${colors}?text=${encodeURIComponent(product.title)}`;
+      };
+
+      // 5. Populate Thumbnails
+      const thumbsContainer = document.getElementById("thumbnails-container");
+      thumbsContainer.innerHTML = "";
+      if (product.thumbnails && product.thumbnails.length > 1) {
+        product.thumbnails.forEach((thumbUrl, idx) => {
+          const card = document.createElement("div");
+          card.className = `thumbnail-card ${idx === 0 ? "active" : ""}`;
+          card.innerHTML = `<img src="${thumbUrl}" alt="Thumbnail ${idx}">`;
+          card.addEventListener("click", () => {
+            document.querySelectorAll(".thumbnail-card").forEach(el => el.classList.remove("active"));
+            card.classList.add("active");
+            
+            // Fade effect on swap
+            mainImg.style.opacity = 0.3;
+            setTimeout(() => {
+              mainImg.src = thumbUrl;
+              mainImg.style.opacity = 1;
+            }, 150);
+          });
+          thumbsContainer.appendChild(card);
+        });
+      } else {
+        thumbsContainer.style.display = "none";
+      }
+
+      // 6. Populate Size/Variant Blocks
+      const variantsWrapper = document.getElementById("variants-selector-wrapper");
+      const variantsContainer = document.getElementById("variants-container");
+      const variantsLabelName = document.getElementById("variants-label-name");
+      const selectedVariantDisplay = document.getElementById("selected-variant-display");
+      
+      variantsLabelName.innerText = product.variantsLabel || "Mărime";
+      variantsContainer.innerHTML = "";
+
+      if (product.variants && product.variants.length > 0) {
+        selectedVariantDisplay.innerText = product.variants[0];
+        product.variants.forEach((variantText, idx) => {
+          const btn = document.createElement("button");
+          btn.className = `variant-block ${idx === 0 ? "active" : ""}`;
+          btn.innerText = variantText;
+          btn.addEventListener("click", () => {
+            document.querySelectorAll(".variant-block").forEach(el => el.classList.remove("active"));
+            btn.classList.add("active");
+            selectedVariantDisplay.innerText = variantText;
+          });
+          variantsContainer.appendChild(btn);
+        });
+      } else {
+        variantsWrapper.style.display = "none";
+      }
+
+      // 7. Populate Colors
+      const colorsWrapper = document.getElementById("colors-selector-wrapper");
+      const colorsContainer = document.getElementById("colors-container");
+      const selectedColorDisplay = document.getElementById("selected-color-display");
+      
+      colorsContainer.innerHTML = "";
+
+      if (product.colors && product.colors.length > 0) {
+        selectedColorDisplay.innerText = product.colorNames ? product.colorNames[0] : "";
+        product.colors.forEach((colorHex, idx) => {
+          const swatch = document.createElement("div");
+          swatch.className = `color-swatch ${idx === 0 ? "active" : ""}`;
+          swatch.style.backgroundColor = colorHex;
+          swatch.addEventListener("click", () => {
+            document.querySelectorAll(".color-swatch").forEach(el => el.classList.remove("active"));
+            swatch.classList.add("active");
+            selectedColorDisplay.innerText = product.colorNames ? product.colorNames[idx] : colorHex;
+          });
+          colorsContainer.appendChild(swatch);
+        });
+      } else {
+        colorsWrapper.style.display = "none";
+      }
+
+      // 8. Populate Specs Table
+      const specsTable = document.getElementById("specs-table-display");
+      specsTable.innerHTML = "";
+      if (product.specs) {
+        Object.entries(product.specs).forEach(([key, val]) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `<td>${key}</td><td>${val}</td>`;
+          specsTable.appendChild(row);
+        });
+      } else {
+        document.querySelectorAll(".accordion-item")[1].style.display = "none";
+      }
+
+      // 9. Accordion toggling
+      document.querySelectorAll(".accordion-header").forEach(header => {
+        header.addEventListener("click", () => {
+          const item = header.parentElement;
+          const isActive = item.classList.contains("active");
+          
+          document.querySelectorAll(".accordion-item").forEach(el => el.classList.remove("active"));
+          
+          if (!isActive) {
+            item.classList.add("active");
+          }
+        });
+      });
+
+      // 10. Qty minus and plus
+      const qtyMinus = document.getElementById("qty-minus");
+      const qtyPlus = document.getElementById("qty-plus");
+      const qtyInput = document.getElementById("qty-val");
+
+      qtyMinus.addEventListener("click", () => {
+        let val = parseInt(qtyInput.value) || 1;
+        if (val > 1) {
+          qtyInput.value = val - 1;
+        }
+      });
+      qtyPlus.addEventListener("click", () => {
+        let val = parseInt(qtyInput.value) || 1;
+        qtyInput.value = val + 1;
+      });
+
+      // 11. Add to cart & buy now interactive notifications
+      const toast = document.getElementById("toast-el");
+      const addToCartTrigger = document.getElementById("add-to-cart-trigger");
+      const buyNowTrigger = document.getElementById("buy-now-trigger");
+
+      addToCartTrigger.addEventListener("click", () => {
+        toast.querySelector("div").innerHTML = `🛒 <strong>${product.title}</strong> (${qtyInput.value} buc.) adăugat în coș!`;
+        toast.classList.add("active");
+        setTimeout(() => {
+          toast.classList.remove("active");
+        }, 4000);
+      });
+
+      buyNowTrigger.addEventListener("click", () => {
+        alert(`Simulare Checkout Shopify:\n\nProdus: ${product.title}\nCantitate: ${qtyInput.value}\nPreț total: ${(parseFloat(product.price.replace(".", "")) * parseInt(qtyInput.value)).toLocaleString("ro-RO")} RON\n\nAceasta este o pagină demo creată de Shopify Expert Romania pentru a demonstra funcționalitatea magazinului.`);
+      });
+
+      // Scroll to reviews anchor
+      document.getElementById("reviews-anchor").addEventListener("click", () => {
+        document.getElementById("reviews-container-section").scrollIntoView({ behavior: "smooth" });
+      });
+
+      // 12. Populate Simulated Reviews
+      const reviewsCardsContainer = document.getElementById("reviews-cards-container");
+      reviewsCardsContainer.innerHTML = "";
+      
+      const reviewsPool = {
+        "fashion": [
+          { name: "Maria D.", date: "15 Mai 2026", stars: "★★★★★", title: "Absolut minunat!", comment: "Am comandat trench-ul clasic beige și sunt uimită de calitatea croielii. Cusăturile sunt perfecte, iar materialul este foarte rezistent la vânt și ploaie. Arată exact ca un brand de designer de mii de euro." },
+          { name: "Andrei G.", date: "02 Iunie 2026", stars: "★★★★★", title: "Calitate excelentă a pielii", comment: "Noir Leather Handbag a fost un cadou pentru soția mea. Pielea este fină, moale, iar detaliile metalice argintii sunt foarte discrete. Ambalajul cadou a fost de asemenea la înălțime." },
+          { name: "Ioana V.", date: "28 Mai 2026", stars: "★★★★☆", title: "Confortabili și moderni", comment: "Ghete/sneakers Luna extrem de comozi. Talpa interioară cu spumă cu memorie se simte grozav de la prima purtare. Recomand o mărime mai mică dacă sunteți între mărimi." }
+        ],
+        "electronics": [
+          { name: "Vlad B.", date: "12 Mai 2026", stars: "★★★★★", title: "Sunet pur, design SF", comment: "Aura Nexus este incredibilă! Basul este extrem de bine definit, sunetul acoperă toată sufrageria fără nicio distorsiune. Designul cu iluminare LED reactivă atrage toate privirile." },
+          { name: "Radu M.", date: "24 Mai 2026", stars: "★★★★★", title: "Anularea zgomotului e magică", comment: "ANC-ul pe Aura Pro Studio izolează perfect zgomotul de birou sau metrou. Bateria ține incredibil de mult. Încărcarea rapidă de 10 minute este un salvator de vieți." },
+          { name: "Cristina T.", date: "08 Iunie 2026", stars: "★★★★☆", title: "Foarte rezistent și arătos", comment: "Aura Chronos este ceasul perfect. Carcasa din titan arată spectaculos, sticla safir nu s-a zgâriat deloc deși l-am lovit din greșeală de mai multe ori. GPS-ul este extrem de precis." }
+        ],
+        "bio": [
+          { name: "Elena R.", date: "19 Mai 2026", stars: "★★★★★", title: "Adio ten uscat!", comment: "Botanical Face Serum mi-a transformat tenul în doar două săptămâni. Pielea este mult mai elastică și hidratată, fără senzație grasă. Ingredientele bio presate la rece chiar se simt." },
+          { name: "Mihaela S.", date: "30 Mai 2026", stars: "★★★★★", title: "Foarte calmantă", comment: "Cremă super hidratantă! O folosesc în fiecare dimineață. Extractul de mușețel chiar ajută cu roșeața și zonele sensibile din jurul nasului. Recomand cu drag!" },
+          { name: "Dan P.", date: "05 Iunie 2026", stars: "★★★★★", title: "Curățare delicată, miros genial", comment: "Săpunul artizanal cu argilă verde curăță blând fața și corpul. Nu lasă pielea uscată deloc. Mirosul proaspăt de lavandă și rozmarin este incredibil de revigorant dimineața." }
+        ],
+        "pets": [
+          { name: "Mihai T.", date: "20 Mai 2026", stars: "★★★★★", title: "Câinele meu îl adoră!", comment: "Pătuțul ortopedic este incredibil. Câinele nostru labrador senior (10 ani) doarme mult mai liniștit și se ridică mult mai ușor dimineața. Husă se spală foarte ușor la mașină." },
+          { name: "Alina D.", date: "01 Iunie 2026", stars: "★★★★★", title: "Postură vizibil îmbunătățită", comment: "Ceramic Feeder este minunat. Pisica noastră nu mai mănâncă grăbită și am observat că refluxul a dispărut complet. Suportul din bambus arată foarte elegant în bucătărie." },
+          { name: "Bogdan K.", date: "29 Mai 2026", stars: "★★★★☆", title: "Jucărie de nota 10", comment: "Smart Toy-ul o ține ocupată pe cățelușă ore întregi. Senzorii de obstacol funcționează perfect, nu rămâne niciodată blocată sub canapea. Merită fiecare ban." }
+        ],
+        "beauty": [
+          { name: "Sorina L.", date: "14 Mai 2026", stars: "★★★★★", title: "Un lux pentru piele", comment: "Crème de Nuit are o textură incredibil de bogată care pur și simplu oferă confort tenului obosit. Dimineața fața este odihnită, luminoasă și netedă ca mătasea." },
+          { name: "Georgiana A.", date: "26 Mai 2026", stars: "★★★★★", title: "Strălucire garantată", comment: "Elixir Rose Serum este uimitor. L-am cumpărat pentru petele pigmentare și văd deja o îmbunătățire uriașă. Tenul este uniformizat și are un luciu satinat discret." },
+          { name: "Lavinia O.", date: "04 Iunie 2026", stars: "★★★★★", title: "Parfum persistent și nobil", comment: "Parfum D'Or este absolut hipnotizant! Notele de iasomie și tuberoză se simt calde, bogate și persistă lejer peste 12 ore pe pielea mea. Flaconul arată ca o operă de artă." }
+        ],
+        "education": [
+          { name: "Alexandru P.", date: "10 Mai 2026", stars: "★★★★★", title: "M-am angajat după 7 luni!", comment: "Cursul Full-Stack este cel mai bun program din România. Proiectele de portofoliu au fost cheia succesului la interviuri. Mentorii oferă explicații extrem de clare și structurate." },
+          { name: "Gabriela F.", date: "21 Mai 2026", stars: "★★★★★", title: "Figma la un alt nivel", comment: "Advanced UI/UX Design m-a ajutat să înțeleg conceptele din spatele unui design system funcțional. Feedback-ul video pe proiecte este de neprețuit, primești sfaturi reale din industrie." },
+          { name: "Marius N.", date: "03 Iunie 2026", stars: "★★★★☆", title: "Foarte bine structurat", comment: "Partea de Machine Learning și Python este explicată pas cu pas. Notebook-urile Jupyter și codul pus la dispoziție sunt clare. Serverul GPU gratuit este un avantaj uriaș." }
+        ]
+      };
+
+      const selectedReviews = reviewsPool[product.categorySlug] || reviewsPool["fashion"];
+      selectedReviews.forEach(rev => {
+        const card = document.createElement("div");
+        card.className = "review-card";
+        card.innerHTML = `
+          <div class="review-header">
+            <span class="reviewer-name">${rev.name} <span class="badge-certified">✓ Verified</span></span>
+            <span class="review-date">${rev.date}</span>
+          </div>
+          <div style="color: #ffd700; font-size: 0.9rem;">${rev.stars}</div>
+          <div class="review-title">${rev.title}</div>
+          <p class="review-comment">"${rev.comment}"</p>
+        `;
+        reviewsCardsContainer.appendChild(card);
+      });
+
+      // 13. Populate Recommendations (the other 2 products from the same category)
+      const recsContainer = document.getElementById("recommendations-grid-container");
+      recsContainer.innerHTML = "";
+
+      const allCategoryProducts = Object.values(window.productsData).filter(p => p.categorySlug === product.categorySlug && p.id !== product.id);
+      allCategoryProducts.forEach(recProd => {
+        const card = document.createElement("a");
+        card.href = `/product.html?id=${recProd.id}`;
+        card.className = "product-card";
+        
+        // Custom background styling for cards on recommendation grid if needed
+        let borderStyle = "";
+        let infoColor = "";
+        let titleColor = "";
+        let bgStyle = "";
+        
+        if (product.categorySlug === "bio") {
+          borderStyle = "border-color: #e3dec9;";
+          bgStyle = "background: rgba(255,255,255,0.4);";
+          infoColor = "color: #3b4238;";
+          titleColor = "color: #6a7c64;";
+        } else if (product.categorySlug === "pets") {
+          borderStyle = "border-color: #ffeb99; border-radius: 30px;";
+          bgStyle = "background: #fff; box-shadow: 0 10px 20px rgba(255,153,51,0.1);";
+          infoColor = "color: #333;";
+          titleColor = "color: #ff7043;";
+        } else if (product.categorySlug === "beauty") {
+          borderStyle = "border-color: rgba(189,142,131,0.2); box-shadow: none;";
+          bgStyle = "background: transparent;";
+          infoColor = "color: #4a403b; text-align: center;";
+          titleColor = "color: #bd8e83; font-family: 'Playfair Display', serif; font-size: 1.5rem;";
+        } else if (product.categorySlug === "education") {
+          borderStyle = "border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);";
+          bgStyle = "background: #fff;";
+          infoColor = "color: #334155; padding: 2rem;";
+          titleColor = "color: #0f172a; margin-bottom: 0.5rem; font-weight: 700; font-size: 1.4rem;";
+        } else if (product.categorySlug === "fashion") {
+          bgStyle = "background: var(--glass-bg);";
+          infoColor = "color: #111;";
+          titleColor = "color: #111; font-weight: 500;";
+        } else {
+          bgStyle = "background: rgba(255,255,255,0.03);";
+          titleColor = "color: #00f0ff;";
+        }
+
+        let imgContainerBg = product.categorySlug === "beauty" ? "#fceeea" : (product.categorySlug === "pets" ? "#ffeb99" : (product.categorySlug === "education" ? "#dbeafe" : "#111"));
+        let imgBorderRad = product.categorySlug === "pets" ? "border-radius: 30px 30px 0 0;" : (product.categorySlug === "education" ? "border-radius: 12px 12px 0 0;" : "");
+        let imgAspect = product.categorySlug === "education" ? "aspect-ratio: 16/9;" : "aspect-ratio: 4/5;";
+
+        let recSize = product.categorySlug === "education" ? "800x600" : "800x1000";
+        let recColors = product.categorySlug === "beauty" ? "fceeea/bd8e83" : (product.categorySlug === "pets" ? "ffb067/FFFFFF" : "dbeafe/2563eb");
+        card.style = `${bgStyle} ${borderStyle}`;
+        card.innerHTML = `
+          <div class="product-img-container" style="background: ${imgContainerBg}; ${imgAspect} ${imgBorderRad}">
+            <img src="${recProd.image}" onerror="this.onerror=null; this.src='https://placehold.co/${recSize}/${recColors}?text=${encodeURIComponent(recProd.title)}';" alt="${recProd.title}" class="product-img">
+          </div>
+          <div class="product-info" style="${infoColor}">
+            <h3 class="product-title" style="${titleColor}">${recProd.title}</h3>
+            <span class="product-price">${recProd.price}</span>
+          </div>
+        `;
+        recsContainer.appendChild(card);
+      });
+    });
+  </script>
+</body>
+</html>

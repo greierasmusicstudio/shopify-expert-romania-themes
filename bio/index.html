@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Botanica | Organic Skincare</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    body {
+      background-color: #f4f1eb;
+      color: #3b4238;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .bio-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 1.5rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .bio-logo {
+      font-size: 1.8rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: lowercase;
+    }
+
+    .bio-menu {
+      display: flex;
+      gap: 3rem;
+      font-weight: 300;
+    }
+
+    .bio-menu a {
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    .bio-menu a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background-color: #3b4238;
+      transition: width 0.4s ease;
+    }
+
+    .bio-menu a:hover::after {
+      width: 100%;
+    }
+
+    .bio-hero {
+      display: flex;
+      min-height: 100vh;
+      align-items: center;
+      padding: 6rem 4rem;
+    }
+
+    .bio-content {
+      flex: 1;
+      padding-right: 4rem;
+    }
+
+    .bio-title {
+      font-size: 5rem;
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 2rem;
+      color: #2b3228;
+    }
+
+    .bio-title span {
+      font-style: italic;
+      color: #6a7c64;
+    }
+
+    .bio-desc {
+      font-size: 1.2rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: #5d635a;
+      margin-bottom: 3rem;
+      max-width: 480px;
+    }
+
+    .bio-btn {
+      display: inline-block;
+      padding: 1.2rem 3rem;
+      background-color: #6a7c64;
+      color: #fff;
+      border-radius: 50px;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      transition: background-color 0.4s ease, transform 0.4s ease;
+    }
+
+    .bio-btn:hover {
+      background-color: #4b5847;
+      transform: translateY(-3px);
+    }
+
+    .bio-image-wrapper {
+      flex: 1;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .blob {
+      position: absolute;
+      width: 80%;
+      height: 90%;
+      background: #e3dec9;
+      border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+      animation: morph 8s ease-in-out infinite alternate;
+      z-index: 0;
+    }
+
+    @keyframes morph {
+      0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+      100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    }
+
+    .bio-image {
+      position: relative;
+      z-index: 1;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 300px 300px 0 0;
+      box-shadow: 0 20px 50px rgba(59, 66, 56, 0.1);
+    }
+    
+    .back-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 999;
+      background: #fff;
+      border: 1px solid #e3dec9;
+      color: #3b4238;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+    .back-btn:hover {
+      background: #e3dec9;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="/" class="back-btn">← Back to Hub</a>
+
+  <nav class="bio-nav animate-fade-in">
+    <div class="bio-logo">botanica</div>
+    <div class="bio-menu">
+      <a href="#">Face</a>
+      <a href="#">Body</a>
+      <a href="#">Our Story</a>
+    </div>
+  </nav>
+
+  <main class="bio-hero">
+    <div class="bio-content animate-fade-in">
+      <h1 class="bio-title">Pure nature,<br><span>bottled.</span></h1>
+      <p class="bio-desc">Discover our new line of 100% organic, cruelty-free skincare. Nourish your skin with the powerful simplicity of botanical extracts.</p>
+      <a href="#" class="bio-btn">Shop Essentials</a>
+    </div>
+    
+    <div class="bio-image-wrapper animate-fade-in" style="animation-delay: 0.3s;">
+      <div class="blob"></div>
+      <img src="/assets/bio_hero.png" alt="Organic Skincare Products" class="bio-image">
+    </div>
+  </main>
+
+  <section class="animate-on-scroll" style="padding: 6rem 4rem; max-width: 1400px; margin: 0 auto;">
+    <h2 class="bio-title" style="font-size: 3rem; text-align: center; margin-bottom: 1rem;">Rutina Ta <span>Zilnică</span></h2>
+    <p class="bio-desc" style="text-align: center; margin: 0 auto 4rem auto;">Formule curate, derivate natural, pentru o strălucire sănătoasă.</p>
+    
+    <div class="product-grid" style="margin-top: 0;">
+      <a href="/product.html?id=bio-1" class="product-card" style="background: rgba(255,255,255,0.4); border-color: #e3dec9;">
+        <div class="product-img-container" style="background: #e3dec9;">
+          <img src="/assets/bio_prod_1.png" alt="Serum" class="product-img">
+        </div>
+        <div class="product-info" style="color: #3b4238;">
+          <h3 class="product-title" style="color: #6a7c64;">Botanical Face Serum</h3>
+          <span class="product-price">185 RON</span>
+        </div>
+      </a>
+      <a href="/product.html?id=bio-2" class="product-card" style="background: rgba(255,255,255,0.4); border-color: #e3dec9;">
+        <div class="product-img-container" style="background: #e3dec9;">
+          <img src="/assets/bio_prod_2.png" alt="Moisturizer" class="product-img">
+        </div>
+        <div class="product-info" style="color: #3b4238;">
+          <h3 class="product-title" style="color: #6a7c64;">Nature's Bloom Cream</h3>
+          <span class="product-price">210 RON</span>
+        </div>
+      </a>
+      <a href="/product.html?id=bio-3" class="product-card" style="background: rgba(255,255,255,0.4); border-color: #e3dec9;">
+        <div class="product-img-container" style="background: #e3dec9;">
+          <img src="/assets/bio_prod_3.png" alt="Organic Soaps" class="product-img">
+        </div>
+        <div class="product-info" style="color: #3b4238;">
+          <h3 class="product-title" style="color: #6a7c64;">Artisanal Organic Soap</h3>
+          <span class="product-price">65 RON</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="animate-on-scroll" style="padding: 4rem 4rem; max-width: 1400px; margin: 0 auto;">
+    <h2 class="bio-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 4rem;">De ce Botanica Bio?</h2>
+    <div class="features-grid" style="color: #3b4238;">
+      <div class="feature-item">
+        <div class="feature-icon" style="color: #6a7c64;">✿</div>
+        <h3 class="feature-title">Ingrediente Evidențiate</h3>
+        <p class="feature-desc" style="color: #5d635a;">Secțiuni special create pentru a povesti proveniența și beneficiile fiecărui ingredient natural.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon" style="color: #6a7c64;">♡</div>
+        <h3 class="feature-title">Design Organic</h3>
+        <p class="feature-desc" style="color: #5d635a;">Forme fluide, culori inspirate din natură și un layout care inspiră liniște și încredere.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon" style="color: #6a7c64;">♻</div>
+        <h3 class="feature-title">Sustenabilitate</h3>
+        <p class="feature-desc" style="color: #5d635a;">Iconografie dedicată pentru certificări (eco-friendly, cruelty-free, vegan) esențiale în această nișă.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section animate-on-scroll" style="background: #e3dec9; border: none; margin-top: 4rem; color: #3b4238;">
+    <h2 class="cta-title">Crește-ți Brandul Natural</h2>
+    <p class="cta-desc" style="color: #5d635a;">Alege Botanica Bio și oferă clienților tăi o experiență de cumpărături la fel de pură precum produsele tale.</p>
+    <a href="/" class="bio-btn">Contact Shopify Expert</a>
+  </section>
+
+  <script src="/main.js"></script>
+</body>
+</html>

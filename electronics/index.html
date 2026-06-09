@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aura Tech | Premium Electronics</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    body {
+      background-color: #030305;
+      color: #e0e0e0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .tech-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 1.5rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: rgba(3, 3, 5, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .tech-logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      background: linear-gradient(90deg, #00f0ff, #7000ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .tech-menu {
+      display: flex;
+      gap: 2.5rem;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .tech-menu a {
+      transition: color 0.3s;
+    }
+    
+    .tech-menu a:hover {
+      color: #00f0ff;
+      text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+    }
+
+    .tech-hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 0 4rem;
+      position: relative;
+    }
+
+    /* Ambient glow */
+    .tech-hero::before {
+      content: '';
+      position: absolute;
+      top: 30%; right: 20%;
+      width: 50vw; height: 50vw;
+      background: radial-gradient(circle, rgba(112,0,255,0.15) 0%, rgba(0,0,0,0) 70%);
+      z-index: -1;
+    }
+
+    .tech-hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .glitch-wrapper {
+      position: relative;
+    }
+
+    .tech-title {
+      font-size: 5.5rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      color: #fff;
+      position: relative;
+    }
+
+    .tech-title::before, .tech-title::after {
+      content: 'Aura Sound';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #030305;
+    }
+
+    .tech-title::before {
+      left: 2px;
+      text-shadow: -2px 0 #00f0ff;
+      clip: rect(24px, 550px, 90px, 0);
+      animation: glitch-anim 3s infinite linear alternate-reverse;
+    }
+
+    .tech-title::after {
+      left: -2px;
+      text-shadow: -2px 0 #7000ff;
+      clip: rect(85px, 550px, 140px, 0);
+      animation: glitch-anim 2.5s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitch-anim {
+      0% { clip: rect(10px, 9999px, 81px, 0); }
+      20% { clip: rect(69px, 9999px, 19px, 0); }
+      40% { clip: rect(110px, 9999px, 3px, 0); }
+      60% { clip: rect(3px, 9999px, 90px, 0); }
+      80% { clip: rect(44px, 9999px, 20px, 0); }
+      100% { clip: rect(88px, 9999px, 50px, 0); }
+    }
+
+    .tech-desc {
+      font-size: 1.2rem;
+      color: #888;
+      max-width: 500px;
+      margin-bottom: 3rem;
+      line-height: 1.6;
+    }
+
+    .tech-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 1rem 2.5rem;
+      background: linear-gradient(90deg, #00f0ff, #7000ff);
+      color: #fff;
+      font-weight: 600;
+      border-radius: 4px;
+      box-shadow: 0 0 20px rgba(112, 0, 255, 0.4);
+      transition: all 0.3s;
+    }
+
+    .tech-btn:hover {
+      box-shadow: 0 0 40px rgba(0, 240, 255, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .tech-image-wrapper {
+      position: relative;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .tech-image {
+      width: 100%;
+      max-width: 800px;
+      position: relative;
+      z-index: 2;
+      filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5));
+    }
+    
+    .back-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 999;
+      background: #111;
+      border: 1px solid #333;
+      color: #fff;
+      padding: 1rem 2rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+    .back-btn:hover {
+      background: #00f0ff;
+      color: #000;
+      border-color: #00f0ff;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="/" class="back-btn">← Back to Hub</a>
+
+  <nav class="tech-nav animate-fade-in">
+    <div class="tech-logo">AURA</div>
+    <div class="tech-menu">
+      <a href="#">Audio</a>
+      <a href="#">Wearables</a>
+      <a href="#">Smart Home</a>
+      <a href="#">Support</a>
+    </div>
+  </nav>
+
+  <main class="tech-hero">
+    <div class="tech-hero-content animate-fade-in">
+      <div class="glitch-wrapper">
+        <h1 class="tech-title">Aura Sound</h1>
+      </div>
+      <p class="tech-desc">Experience absolute acoustic perfection. Active noise cancellation powered by neural networks, wrapped in aerospace-grade aluminum.</p>
+      <a href="#" class="tech-btn">Pre-order Now</a>
+    </div>
+    
+    <div class="tech-image-wrapper animate-fade-in" style="animation-delay: 0.3s;">
+      <img src="/assets/electronics_hero.png" alt="Aura Wireless Headphones" class="tech-image">
+    </div>
+  </main>
+
+  <section class="animate-on-scroll" style="padding: 6rem 4rem; max-width: 1400px; margin: 0 auto;">
+    <h2 class="tech-title" style="font-size: 3rem; text-align: center; margin-bottom: 1rem;">Future Tech</h2>
+    <p class="tech-desc" style="text-align: center; margin: 0 auto 4rem auto;">Echipamente de ultimă generație pentru pasionații de inovație.</p>
+    
+    <div class="product-grid" style="margin-top: 0;">
+      <a href="/product.html?id=electronics-1" class="product-card" style="background: rgba(255,255,255,0.03);">
+        <div class="product-img-container" style="background: #000;">
+          <img src="/assets/electronics_prod_1.png" alt="Smart Speaker" class="product-img">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title" style="color: #00f0ff;">Aura Nexus Speaker</h3>
+          <span class="product-price">1.299 RON</span>
+        </div>
+      </a>
+      <a href="/product.html?id=electronics-2" class="product-card" style="background: rgba(255,255,255,0.03);">
+        <div class="product-img-container" style="background: #000;">
+          <img src="/assets/electronics_prod_2.png" alt="Headphones" class="product-img">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title" style="color: #7000ff;">Aura Pro Studio</h3>
+          <span class="product-price">2.499 RON</span>
+        </div>
+      </a>
+      <a href="/product.html?id=electronics-3" class="product-card" style="background: rgba(255,255,255,0.03);">
+        <div class="product-img-container" style="background: #000;">
+          <img src="/assets/electronics_prod_3.png" alt="Smartwatch" class="product-img">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title" style="color: #00f0ff;">Aura Chronos</h3>
+          <span class="product-price">3.150 RON</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="animate-on-scroll" style="padding: 4rem 4rem; max-width: 1400px; margin: 0 auto;">
+    <h2 class="tech-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 4rem;">De ce Aura Tech?</h2>
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-icon" style="color: #00f0ff;">⚲</div>
+        <h3 class="feature-title">Căutare Inteligentă</h3>
+        <p class="feature-desc">Integrare avansată a căutării cu filtre instantanee, esențială pentru cataloage complexe de electronice.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon" style="color: #7000ff;">⟁</div>
+        <h3 class="feature-title">Modelare 3D</h3>
+        <p class="feature-desc">Suport nativ pentru vizualizarea produselor în format 3D și AR direct în browser.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon" style="color: #00f0ff;">✧</div>
+        <h3 class="feature-title">Dark Mode Nativ</h3>
+        <p class="feature-desc">O estetică dark mode profundă, cu contrast ridicat, perfectă pentru produsele de tehnologie premium.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section animate-on-scroll" style="background: rgba(112,0,255,0.05); border-top: 1px solid rgba(0,240,255,0.2);">
+    <h2 class="cta-title">Treci la Următorul Nivel</h2>
+    <p class="cta-desc">Lansează-ți brandul de electronice cu o temă Shopify care reflectă inovația produselor tale.</p>
+    <a href="/" class="tech-btn">Contact Shopify Expert</a>
+  </section>
+
+  <script src="/main.js"></script>
+</body>
+</html>
