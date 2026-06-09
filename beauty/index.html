@@ -148,6 +148,82 @@
       background: #bd8e83;
       color: #fff;
     }
+
+    /* Before/After Slider */
+    .comp-container {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      aspect-ratio: 16/10;
+      margin: 0 auto;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(189, 142, 131, 0.15);
+      background: #fceeea;
+    }
+    .comp-img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .comp-before {
+      clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+      z-index: 2;
+      filter: saturate(0.2) contrast(1.1) sepia(0.3) brightness(0.9); /* Simulates dull/dry skin */
+    }
+    .comp-after {
+      filter: saturate(1.1) brightness(1.05); /* Simulates glowing/hydrated skin */
+    }
+    .comp-slider {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 10;
+      opacity: 0;
+      cursor: ew-resize;
+    }
+    .comp-slider-line {
+      position: absolute;
+      top: 0; left: 50%;
+      bottom: 0;
+      width: 3px;
+      background: #fff;
+      z-index: 5;
+      transform: translateX(-50%);
+      pointer-events: none;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    .comp-slider-btn {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 48px; height: 48px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #bd8e83;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .comp-labels {
+      position: absolute;
+      top: 1.5rem; left: 1.5rem; right: 1.5rem;
+      display: flex; justify-content: space-between;
+      z-index: 4;
+      pointer-events: none;
+    }
+    .comp-label {
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(4px);
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #4a403b;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
   </style>
 </head>
 <body>
@@ -212,6 +288,34 @@
     </div>
   </section>
 
+  <section class="animate-on-scroll" style="padding: 6rem 4rem; max-width: 1400px; margin: 0 auto; margin-top: 2rem;">
+    <h2 class="beauty-title" style="font-size: 3rem; text-align: center; margin-bottom: 1rem; font-family: 'Playfair Display', serif;">Eficacitate <i>Dovedită</i></h2>
+    <p class="beauty-desc" style="text-align: center; margin: 0 auto 4rem auto;">Diferența vizibilă dintre un ten deshidratat și unul intens hrănit cu ceramide.</p>
+    
+    <div class="comp-container">
+      <!-- After Image (Hydrated) -->
+      <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=1200&auto=format&fit=crop" class="comp-img comp-after" alt="Piele Hidratată">
+      
+      <!-- Before Image (Dry) -->
+      <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=1200&auto=format&fit=crop" class="comp-img comp-before" id="comp-before" alt="Piele Uscată">
+      
+      <!-- Slider Input -->
+      <input type="range" min="0" max="100" value="50" id="comp-slider" class="comp-slider" aria-label="Compară pielea înainte și după">
+      
+      <!-- Slider Line & Button -->
+      <div class="comp-slider-line" id="comp-line">
+        <div class="comp-slider-btn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l4-4-4-4M9 6L5 10l4 4"/></svg>
+        </div>
+      </div>
+      
+      <div class="comp-labels">
+        <span class="comp-label before-label">Înainte (Deshidratat)</span>
+        <span class="comp-label after-label">După (Lumière)</span>
+      </div>
+    </div>
+  </section>
+
   <section class="animate-on-scroll" style="padding: 4rem 4rem; max-width: 1400px; margin: 0 auto;">
     <h2 class="beauty-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 4rem;">De ce Lumière Beauty?</h2>
     <div class="features-grid" style="color: #4a403b;">
@@ -240,5 +344,18 @@
   </section>
 
   <script src="/main.js"></script>
+  <script>
+    const compSlider = document.getElementById('comp-slider');
+    const compBefore = document.getElementById('comp-before');
+    const compLine = document.getElementById('comp-line');
+    
+    if(compSlider && compBefore && compLine) {
+      compSlider.addEventListener('input', (e) => {
+        const val = e.target.value;
+        compBefore.style.clipPath = `polygon(0 0, ${val}% 0, ${val}% 100%, 0 100%)`;
+        compLine.style.left = `${val}%`;
+      });
+    }
+  </script>
 </body>
 </html>
