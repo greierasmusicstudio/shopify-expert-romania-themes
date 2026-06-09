@@ -154,8 +154,13 @@
   </style>
 </head>
 <body>
+  <!-- Global Language Selector -->
+  <div class="global-lang-selector">
+    <button class="lang-btn" data-lang="ro">RO</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+  </div>
 
-  <a href="/" class="back-btn">← Back to Hub</a>
+  <a href="/" class="back-btn" data-i18n="back_to_hub">← Back to Hub</a>
 
   <nav class="bio-nav animate-fade-in">
     <div class="bio-logo">botanica</div>
@@ -168,9 +173,9 @@
 
   <main class="bio-hero">
     <div class="bio-content animate-fade-in">
-      <h1 class="bio-title">Pure nature,<br><span>bottled.</span></h1>
-      <p class="bio-desc">Discover our new line of 100% organic, cruelty-free skincare. Nourish your skin with the powerful simplicity of botanical extracts.</p>
-      <a href="#" class="bio-btn">Shop Essentials</a>
+      <h1 class="bio-title" data-i18n="bio_hero_title">Pure nature,<br><span>bottled.</span></h1>
+      <p class="bio-desc" data-i18n="bio_hero_desc">Discover our new line of 100% organic, cruelty-free skincare. Nourish your skin with the powerful simplicity of botanical extracts.</p>
+      <a href="#" class="bio-btn" data-i18n="bio_btn_shop">Shop Essentials</a>
     </div>
     
     <div class="bio-image-wrapper animate-fade-in" style="animation-delay: 0.3s;">
@@ -180,8 +185,8 @@
   </main>
 
   <section class="animate-on-scroll" style="padding: 6rem 4rem; max-width: 1400px; margin: 0 auto;">
-    <h2 class="bio-title" style="font-size: 3rem; text-align: center; margin-bottom: 1rem;">Rutina Ta <span>Zilnică</span></h2>
-    <p class="bio-desc" style="text-align: center; margin: 0 auto 4rem auto;">Formule curate, derivate natural, pentru o strălucire sănătoasă.</p>
+    <h2 class="bio-title" style="font-size: 3rem; text-align: center; margin-bottom: 1rem;" data-i18n="bio_routine_title">Rutina Ta <span>Zilnică</span></h2>
+    <p class="bio-desc" style="text-align: center; margin: 0 auto 4rem auto;" data-i18n="bio_routine_desc">Formule curate, derivate natural, pentru o strălucire sănătoasă.</p>
     
     <div class="product-grid" style="margin-top: 0;">
       <a href="/product.html?id=bio-1" class="product-card" style="background: rgba(255,255,255,0.4); border-color: #e3dec9;">
@@ -215,22 +220,22 @@
   </section>
 
   <section class="animate-on-scroll" style="padding: 4rem 4rem; max-width: 1400px; margin: 0 auto;">
-    <h2 class="bio-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 4rem;">De ce Botanica Bio?</h2>
+    <h2 class="bio-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 4rem;" data-i18n="bio_features_title">De ce Botanica Bio?</h2>
     <div class="features-grid" style="color: #3b4238;">
       <div class="feature-item">
         <div class="feature-icon" style="color: #6a7c64;">✿</div>
-        <h3 class="feature-title">Ingrediente Evidențiate</h3>
-        <p class="feature-desc" style="color: #5d635a;">Secțiuni special create pentru a povesti proveniența și beneficiile fiecărui ingredient natural.</p>
+        <h3 class="feature-title" data-i18n="bio_feat1_title">Ingrediente Evidențiate</h3>
+        <p class="feature-desc" style="color: #5d635a;" data-i18n="bio_feat1_desc">Secțiuni special create pentru a povesti proveniența și beneficiile fiecărui ingredient natural.</p>
       </div>
       <div class="feature-item">
         <div class="feature-icon" style="color: #6a7c64;">♡</div>
-        <h3 class="feature-title">Design Organic</h3>
-        <p class="feature-desc" style="color: #5d635a;">Forme fluide, culori inspirate din natură și un layout care inspiră liniște și încredere.</p>
+        <h3 class="feature-title" data-i18n="bio_feat2_title">Design Organic</h3>
+        <p class="feature-desc" style="color: #5d635a;" data-i18n="bio_feat2_desc">Forme fluide, culori inspirate din natură și un layout care inspiră liniște și încredere.</p>
       </div>
       <div class="feature-item">
         <div class="feature-icon" style="color: #6a7c64;">♻</div>
-        <h3 class="feature-title">Sustenabilitate</h3>
-        <p class="feature-desc" style="color: #5d635a;">Iconografie dedicată pentru certificări (eco-friendly, cruelty-free, vegan) esențiale în această nișă.</p>
+        <h3 class="feature-title" data-i18n="bio_feat3_title">Sustenabilitate</h3>
+        <p class="feature-desc" style="color: #5d635a;" data-i18n="bio_feat3_desc">Iconografie dedicată pentru certificări (eco-friendly, cruelty-free, vegan) esențiale în această nișă.</p>
       </div>
     </div>
   </section>
@@ -253,11 +258,12 @@
   </div>
 
   <section class="cta-section animate-on-scroll" style="background: #e3dec9; border: none; margin-top: 4rem; color: #3b4238;">
-    <h2 class="cta-title">Crește-ți Brandul Natural</h2>
-    <p class="cta-desc" style="color: #5d635a;">Alege Botanica Bio și oferă clienților tăi o experiență de cumpărături la fel de pură precum produsele tale.</p>
-    <a href="/" class="bio-btn">Contact Shopify Expert</a>
+    <h2 class="cta-title" data-i18n="section_cta_title">Crește-ți Brandul Natural</h2>
+    <p class="cta-desc" style="color: #5d635a;" data-i18n="section_cta_desc">Alege Botanica Bio și oferă clienților tăi o experiență de cumpărături la fel de pură precum produsele tale.</p>
+    <a href="/" class="bio-btn" data-i18n="btn_contact">Contact Shopify Expert</a>
   </section>
 
+  <script src="/translations.js"></script>
   <script src="/main.js"></script>
 </body>
 </html>

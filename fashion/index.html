@@ -141,8 +141,13 @@
   </style>
 </head>
 <body>
+  <!-- Global Language Selector -->
+  <div class="global-lang-selector">
+    <button class="lang-btn" data-lang="ro">RO</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+  </div>
 
-  <a href="/" class="back-btn">← Back to Hub</a>
+  <a href="/" class="back-btn" data-i18n="back_to_hub">← Back to Hub</a>
 
   <nav class="fashion-nav animate-fade-in">
     <div class="fashion-logo">Aurore</div>
@@ -157,17 +162,17 @@
   <header class="fashion-hero">
     <img src="/assets/fashion_hero.png" alt="Aurore Fashion Collection" class="fashion-hero-img">
     <div class="fashion-hero-content animate-fade-in" style="animation-delay: 0.5s;">
-      <h1 class="fashion-hero-title">Timeless<br>Elegance</h1>
-      <a href="#" class="fashion-btn">Discover the Collection</a>
+      <h1 class="fashion-hero-title" data-i18n="fashion_hero_title">Timeless<br>Elegance</h1>
+      <a href="#" class="fashion-btn" data-i18n="fashion_btn_shop">Discover the Collection</a>
     </div>
   </header>
 
   <section class="fashion-section">
     <div class="grid-2">
       <div class="animate-on-scroll">
-        <h2 class="section-title">The Art of Subtlety</h2>
-        <p class="section-text">Every piece is crafted with an uncompromising dedication to quality and design. We believe that true luxury whispers, it doesn't shout. Our new collection embraces minimalist forms and exquisite materials.</p>
-        <a href="#" class="fashion-btn" style="border-color: #000; color: #000;">View Lookbook</a>
+        <h2 class="section-title" data-i18n="fashion_hero_subtitle">The Art of Subtlety</h2>
+        <p class="section-text" data-i18n="fashion_hero_desc">Every piece is crafted with an uncompromising dedication to quality and design. We believe that true luxury whispers, it doesn't shout. Our new collection embraces minimalist forms and exquisite materials.</p>
+        <a href="#" class="fashion-btn" style="border-color: #000; color: #000;" data-i18n="view_details">View Lookbook</a>
       </div>
       <div class="animate-on-scroll" style="animation-delay: 0.2s;">
         <img src="/assets/fashion_hero.png" alt="Detail shot" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; filter: grayscale(1);">
@@ -177,7 +182,7 @@
 
   <section class="fashion-section animate-on-scroll" style="background-color: #fff; max-width: none; padding-top: 4rem; padding-bottom: 4rem;">
     <div style="max-width: 1400px; margin: 0 auto;">
-      <h2 class="section-title" style="text-align: center; margin-bottom: 1rem;">Noutăți Colecție</h2>
+      <h2 class="section-title" style="text-align: center; margin-bottom: 1rem;" data-i18n="section_featured">Noutăți Colecție</h2>
       <p class="section-text" style="text-align: center; margin-bottom: 4rem;">Descoperă cele mai recente piese adăugate în colecția noastră exclusivistă.</p>
       
       <div class="product-grid" style="margin-top: 0;">
@@ -213,22 +218,22 @@
   </section>
 
   <section class="fashion-section animate-on-scroll">
-    <h2 class="section-title" style="text-align: center;">De ce Aurore Fashion?</h2>
+    <h2 class="section-title" style="text-align: center;" data-i18n="section_features">De ce Aurore Fashion?</h2>
     <div class="features-grid" style="color: #111;">
       <div class="feature-item">
         <div class="feature-icon" style="color: #000;">✧</div>
-        <h3 class="feature-title">Design Minimalist</h3>
-        <p class="feature-desc">O estetică curată și aerisită care pune produsele pe primul loc, oferind o experiență de cumpărături premium.</p>
+        <h3 class="feature-title" data-i18n="fashion_feat1_title">Design Minimalist</h3>
+        <p class="feature-desc" data-i18n="fashion_feat1_desc">O estetică curată și aerisită care pune produsele pe primul loc, oferind o experiență de cumpărături premium.</p>
       </div>
       <div class="feature-item">
         <div class="feature-icon" style="color: #000;">⚡</div>
-        <h3 class="feature-title">Performanță Ridicată</h3>
-        <p class="feature-desc">Optimizat pentru viteză de încărcare ultra-rapidă, esențială pentru ratele de conversie în comerțul electronic de lux.</p>
+        <h3 class="feature-title" data-i18n="fashion_feat2_title">Performanță Ridicată</h3>
+        <p class="feature-desc" data-i18n="fashion_feat2_desc">Optimizat pentru viteză de încărcare ultra-rapidă, esențială pentru ratele de conversie în comerțul electronic de lux.</p>
       </div>
       <div class="feature-item">
         <div class="feature-icon" style="color: #000;">✦</div>
-        <h3 class="feature-title">Animații Fluide</h3>
-        <p class="feature-desc">Tranziții subtile și elegante care ghidează utilizatorul și creează o poveste vizuală captivantă.</p>
+        <h3 class="feature-title" data-i18n="fashion_feat3_title">Animații Fluide</h3>
+        <p class="feature-desc" data-i18n="fashion_feat3_desc">Tranziții subtile și elegante care ghidează utilizatorul și creează o poveste vizuală captivantă.</p>
       </div>
     </div>
   </section>
@@ -251,11 +256,12 @@
   </div>
 
   <section class="cta-section animate-on-scroll" style="background: #000; color: #fff; border: none; margin-top: 0;">
-    <h2 class="cta-title">Începe Povestea Brandului Tău</h2>
-    <p class="cta-desc" style="color: #ccc;">Alege tema Aurore Fashion pentru magazinul tău Shopify și transformă vizitatorii în clienți fideli printr-o experiență de neuitat.</p>
-    <a href="/" class="fashion-btn">Contact Shopify Expert</a>
+    <h2 class="cta-title" data-i18n="section_cta_title">Începe Povestea Brandului Tău</h2>
+    <p class="cta-desc" style="color: #ccc;" data-i18n="section_cta_desc">Alege tema Aurore Fashion pentru magazinul tău Shopify și transformă vizitatorii în clienți fideli printr-o experiență de neuitat.</p>
+    <a href="/" class="fashion-btn" data-i18n="btn_contact">Contact Shopify Expert</a>
   </section>
 
+  <script src="/translations.js"></script>
   <script src="/main.js"></script>
 </body>
 </html>

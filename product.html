@@ -799,6 +799,11 @@
   </style>
 </head>
 <body>
+  <!-- Global Language Selector -->
+  <div class="global-lang-selector">
+    <button class="lang-btn" data-lang="ro">RO</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+  </div>
 
   <!-- Floating Nav -->
   <nav class="details-nav">
@@ -975,103 +980,57 @@
     <button class="toast-checkout-btn" onclick="window.location.href='/'">Finalizează</button>
   </div>
 
+  <script src="/translations.js"></script>
   <script src="/products-data.js"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      // 1. Get query params
-      const params = new URLSearchParams(window.location.search);
-      const productId = params.get("id") || "fashion-1";
-
-      // 2. Load product
-      const product = window.productsData ? window.productsData[productId] : null;
-
-      if (!product) {
-        // Show error state inside container
-        document.querySelector(".product-wrapper").innerHTML = `
-          <div style="text-align: center; padding: 6rem 2rem;">
-            <h1 style="font-size: 2.5rem; margin-bottom: 2rem;">Hopa! Produsul nu a fost găsit.</h1>
-            <p style="color: #666; margin-bottom: 3rem;">Produsul cu ID-ul "${productId}" nu există în baza noastră de date demo.</p>
-            <a href="/" class="back-btn-header" style="padding: 1rem 2.5rem; font-size: 1rem;">Înapoi la Hub Principal</a>
-          </div>
-        `;
-        return;
-      }
-
-      // 3. Apply category styling
-      document.body.className = `theme-${product.categorySlug}`;
-
-      // 4. Update texts and contents
-      document.title = `${product.title} | Premium Shopify Demo`;
-      document.getElementById("logo-display").innerText = product.category === "Premium Beauty" ? "Lumière" : (product.category === "Pet Supplies" ? "Joyful Pets" : (product.category === "Online Learning" ? "EduPremier" : "AURA"));
+    let currentProduct = null;
+    
+    function renderProductLang(lang) {
+      if (!currentProduct) return;
+      const product = currentProduct;
+      
+      document.title = `${product.title[lang]} | Premium Shopify Demo`;
+      document.getElementById("logo-display").innerText = product.categorySlug === "beauty" ? "Lumière" : (product.categorySlug === "pets" ? "Joyful Pets" : (product.categorySlug === "education" ? "EduPremier" : "AURA"));
       
       const backLink = document.getElementById("back-link");
       backLink.href = `/${product.categorySlug}/`;
       if (window.innerWidth < 768) {
-        backLink.innerText = "← Înapoi";
+        backLink.innerText = translations["prod_back"][lang];
       } else {
-        backLink.innerText = `← Înapoi la Magazinul ${product.category}`;
+        backLink.innerText = `${translations["prod_back"][lang]} - ${product.category[lang]}`;
       }
 
       document.getElementById("crumb-category").href = `/${product.categorySlug}/`;
-      document.getElementById("crumb-category").innerText = product.category;
-      document.getElementById("crumb-product").innerText = product.title;
+      document.getElementById("crumb-category").innerText = product.category[lang];
+      document.getElementById("crumb-product").innerText = product.title[lang];
 
-      document.getElementById("brand-badge").innerText = product.categorySlug === "education" ? "CURS ACREDITAT" : "PRODUS DEMO PREMIUM";
-      document.getElementById("product-title-display").innerText = product.title;
+      document.getElementById("brand-badge").innerText = product.categorySlug === "education" ? (lang === 'ro' ? "CURS ACREDITAT" : "ACCREDITED COURSE") : (lang === 'ro' ? "PRODUS DEMO PREMIUM" : "PREMIUM DEMO PRODUCT");
+      document.getElementById("product-title-display").innerText = product.title[lang];
       document.getElementById("product-rating").innerText = `${product.rating}/5.0`;
-      document.getElementById("reviews-anchor").innerText = `${product.reviewsCount} verified`;
+      document.getElementById("reviews-anchor").innerText = product.reviewsCount[lang];
       document.getElementById("price-display-val").innerText = product.price;
       document.getElementById("old-price-val").innerText = product.oldPrice;
-      document.getElementById("product-desc-display").innerText = product.desc;
-      document.getElementById("long-desc-display").innerHTML = product.longDesc;
+      document.getElementById("product-desc-display").innerText = product.desc[lang];
+      document.getElementById("long-desc-display").innerHTML = product.longDesc[lang];
 
-      // Render main image
-      const mainImg = document.getElementById("main-product-image");
-      mainImg.src = product.image;
-      mainImg.alt = product.title;
-      mainImg.onerror = () => {
-        let size = product.categorySlug === "education" ? "800x600" : "800x1000";
-        let colors = product.categorySlug === "beauty" ? "fceeea/bd8e83" : (product.categorySlug === "pets" ? "ffb067/FFFFFF" : "dbeafe/2563eb");
-        mainImg.src = `https://placehold.co/${size}/${colors}?text=${encodeURIComponent(product.title)}`;
-      };
-
-      // 5. Populate Thumbnails
-      const thumbsContainer = document.getElementById("thumbnails-container");
-      thumbsContainer.innerHTML = "";
-      if (product.thumbnails && product.thumbnails.length > 1) {
-        product.thumbnails.forEach((thumbUrl, idx) => {
-          const card = document.createElement("div");
-          card.className = `thumbnail-card ${idx === 0 ? "active" : ""}`;
-          card.innerHTML = `<img src="${thumbUrl}" alt="Thumbnail ${idx}">`;
-          card.addEventListener("click", () => {
-            document.querySelectorAll(".thumbnail-card").forEach(el => el.classList.remove("active"));
-            card.classList.add("active");
-            
-            // Fade effect on swap
-            mainImg.style.opacity = 0.3;
-            setTimeout(() => {
-              mainImg.src = thumbUrl;
-              mainImg.style.opacity = 1;
-            }, 150);
-          });
-          thumbsContainer.appendChild(card);
-        });
-      } else {
-        thumbsContainer.style.display = "none";
-      }
-
-      // 6. Populate Size/Variant Blocks
+      // Variants
+      const variantsLabelName = document.getElementById("variants-label-name");
       const variantsWrapper = document.getElementById("variants-selector-wrapper");
       const variantsContainer = document.getElementById("variants-container");
-      const variantsLabelName = document.getElementById("variants-label-name");
       const selectedVariantDisplay = document.getElementById("selected-variant-display");
       
-      variantsLabelName.innerText = product.variantsLabel || "Mărime";
-      variantsContainer.innerHTML = "";
+      if (product.variantsLabel) {
+        variantsLabelName.innerText = product.variantsLabel[lang] || "Mărime";
+      }
 
-      if (product.variants && product.variants.length > 0) {
-        selectedVariantDisplay.innerText = product.variants[0];
-        product.variants.forEach((variantText, idx) => {
+      let vars = product.variants;
+      if (vars && !Array.isArray(vars) && vars[lang]) vars = vars[lang];
+      
+      if (vars && vars.length > 0) {
+        variantsWrapper.style.display = "flex";
+        selectedVariantDisplay.innerText = vars[0];
+        variantsContainer.innerHTML = "";
+        vars.forEach((variantText, idx) => {
           const btn = document.createElement("button");
           btn.className = `variant-block ${idx === 0 ? "active" : ""}`;
           btn.innerText = variantText;
@@ -1086,23 +1045,168 @@
         variantsWrapper.style.display = "none";
       }
 
-      // 7. Populate Colors
+      // Specs Table
+      const specsTable = document.getElementById("specs-table-display");
+      specsTable.innerHTML = "";
+      if (product.specs && product.specs[lang]) {
+        Object.entries(product.specs[lang]).forEach(([key, val]) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `<td>${key}</td><td>${val}</td>`;
+          specsTable.appendChild(row);
+        });
+        document.querySelectorAll(".accordion-item")[1].style.display = "block";
+      } else {
+        document.querySelectorAll(".accordion-item")[1].style.display = "none";
+      }
+      
+      // Update recommendation titles
+      const recsContainer = document.getElementById("recommendations-grid-container");
+      recsContainer.innerHTML = "";
+      const allCategoryProducts = Object.values(window.productsData).filter(p => p.categorySlug === product.categorySlug && p.id !== product.id);
+      
+      allCategoryProducts.forEach(recProd => {
+        const card = document.createElement("a");
+        card.href = `/product.html?id=${recProd.id}`;
+        card.className = "product-card";
+        
+        let borderStyle = ""; let infoColor = ""; let titleColor = ""; let bgStyle = "";
+        
+        if (product.categorySlug === "bio") {
+          borderStyle = "border-color: #e3dec9;"; bgStyle = "background: rgba(255,255,255,0.4);";
+          infoColor = "color: #3b4238;"; titleColor = "color: #6a7c64;";
+        } else if (product.categorySlug === "pets") {
+          borderStyle = "border-color: #ffeb99; border-radius: 30px;"; bgStyle = "background: #fff; box-shadow: 0 10px 20px rgba(255,153,51,0.1);";
+          infoColor = "color: #333;"; titleColor = "color: #ff7043;";
+        } else if (product.categorySlug === "beauty") {
+          borderStyle = "border-color: rgba(189,142,131,0.2); box-shadow: none;"; bgStyle = "background: transparent;";
+          infoColor = "color: #4a403b; text-align: center;"; titleColor = "color: #bd8e83; font-family: 'Playfair Display', serif; font-size: 1.5rem;";
+        } else if (product.categorySlug === "education") {
+          borderStyle = "border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);";
+          bgStyle = "background: #fff;"; infoColor = "color: #334155; padding: 2rem;"; titleColor = "color: #0f172a; margin-bottom: 0.5rem; font-weight: 700; font-size: 1.4rem;";
+        } else if (product.categorySlug === "fashion") {
+          bgStyle = "background: var(--glass-bg);"; infoColor = "color: #111;"; titleColor = "color: #111; font-weight: 500;";
+        } else {
+          bgStyle = "background: rgba(255,255,255,0.03);"; titleColor = "color: #00f0ff;";
+        }
+
+        let imgContainerBg = product.categorySlug === "beauty" ? "#fceeea" : (product.categorySlug === "pets" ? "#ffeb99" : (product.categorySlug === "education" ? "#dbeafe" : "#111"));
+        let imgBorderRad = product.categorySlug === "pets" ? "border-radius: 30px 30px 0 0;" : (product.categorySlug === "education" ? "border-radius: 12px 12px 0 0;" : "");
+        let imgAspect = product.categorySlug === "education" ? "aspect-ratio: 16/9;" : "aspect-ratio: 4/5;";
+
+        let recSize = product.categorySlug === "education" ? "800x600" : "800x1000";
+        let recColors = product.categorySlug === "beauty" ? "fceeea/bd8e83" : (product.categorySlug === "pets" ? "ffb067/FFFFFF" : "dbeafe/2563eb");
+        
+        card.style = `${bgStyle} ${borderStyle}`;
+        card.innerHTML = `
+          <div class="product-img-container" style="background: ${imgContainerBg}; ${imgAspect} ${imgBorderRad}">
+            <img src="${recProd.image}" onerror="this.onerror=null; this.src='https://placehold.co/${recSize}/${recColors}?text=${encodeURIComponent(recProd.title[lang])}';" alt="${recProd.title[lang]}" class="product-img">
+          </div>
+          <div class="product-info" style="${infoColor}">
+            <h3 class="product-title" style="${titleColor}">${recProd.title[lang]}</h3>
+            <span class="product-price">${recProd.price}</span>
+          </div>
+        `;
+        recsContainer.appendChild(card);
+      });
+      
+      // Update action buttons text
+      document.getElementById("add-to-cart-trigger").innerText = translations["prod_add"][lang] || "Adaugă în Coș";
+      document.getElementById("buy-now-trigger").innerText = lang === 'ro' ? "Cumpără Acum" : "Buy Now";
+      document.getElementById("toast-el").querySelector(".toast-checkout-btn").innerText = lang === 'ro' ? "Finalizează" : "Checkout";
+
+      // Accordion Titles
+      const accHeaders = document.querySelectorAll(".accordion-header span:first-child");
+      if(accHeaders.length >= 3) {
+        accHeaders[0].innerText = lang === 'ro' ? "Descrierea Produsului" : "Product Description";
+        accHeaders[1].innerText = lang === 'ro' ? "Specificații Tehnice & Detalii" : "Technical Specs & Details";
+        accHeaders[2].innerText = lang === 'ro' ? "Livrare & Politică Retur" : "Shipping & Returns Policy";
+      }
+      
+      const accContents = document.querySelectorAll(".accordion-content");
+      if(accContents.length >= 3) {
+        accContents[2].innerText = lang === 'ro' ? 
+          "Oferim livrare gratuită pentru comenzi de peste 200 RON. Comenzile plasate până în ora 15:00 sunt predate curierului în aceeași zi. Returul este acoperit integral de noi în termen de 30 de zile dacă produsul este în ambalajul original și nu prezintă urme de uzură." :
+          "We offer free shipping on orders over 200 RON. Orders placed by 15:00 are handed over to the courier the same day. Returns are fully covered by us within 30 days if the product is in its original packaging and shows no signs of wear.";
+      }
+      
+      // Features trust badges
+      const trustBadges = document.querySelectorAll(".trust-badge-item");
+      if(trustBadges.length >= 3) {
+         trustBadges[0].querySelector("strong").innerText = lang === 'ro' ? "Livrare Rapidă" : "Fast Delivery";
+         trustBadges[0].querySelector("span:last-child").innerText = lang === 'ro' ? "24/48 ore în toată țara" : "24/48 hours nationwide";
+         trustBadges[1].querySelector("strong").innerText = lang === 'ro' ? "Plată Securizată" : "Secure Payment";
+         trustBadges[1].querySelector("span:last-child").innerText = lang === 'ro' ? "3D Secure & Ramburs" : "3D Secure & Cash on Delivery";
+         trustBadges[2].querySelector("strong").innerText = lang === 'ro' ? "Retur Simplu" : "Easy Returns";
+         trustBadges[2].querySelector("span:last-child").innerText = lang === 'ro' ? "30 zile garanție retur" : "30 days return guarantee";
+      }
+      
+      document.querySelector(".reviews-title").innerText = lang === 'ro' ? "Opinia Clienților Noștri" : "What Our Customers Say";
+      document.querySelector(".recommendations-title").innerText = lang === 'ro' ? "S-ar Putea Să-ți Placă Și..." : "You Might Also Like...";
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const params = new URLSearchParams(window.location.search);
+      const productId = params.get("id") || "fashion-1";
+
+      currentProduct = window.productsData ? window.productsData[productId] : null;
+
+      if (!currentProduct) {
+        document.querySelector(".product-wrapper").innerHTML = `
+          <div style="text-align: center; padding: 6rem 2rem;">
+            <h1 style="font-size: 2.5rem; margin-bottom: 2rem;">Hopa! Produsul nu a fost găsit.</h1>
+            <a href="/" class="back-btn-header" style="padding: 1rem 2.5rem; font-size: 1rem;">Înapoi la Hub Principal</a>
+          </div>
+        `;
+        return;
+      }
+
+      document.body.className = `theme-${currentProduct.categorySlug}`;
+
+      const mainImg = document.getElementById("main-product-image");
+      mainImg.src = currentProduct.image;
+      mainImg.alt = "Product Image";
+      mainImg.onerror = () => {
+        let size = currentProduct.categorySlug === "education" ? "800x600" : "800x1000";
+        let colors = currentProduct.categorySlug === "beauty" ? "fceeea/bd8e83" : (currentProduct.categorySlug === "pets" ? "ffb067/FFFFFF" : "dbeafe/2563eb");
+        mainImg.src = `https://placehold.co/${size}/${colors}?text=Preview`;
+      };
+
+      const thumbsContainer = document.getElementById("thumbnails-container");
+      thumbsContainer.innerHTML = "";
+      if (currentProduct.thumbnails && currentProduct.thumbnails.length > 1) {
+        currentProduct.thumbnails.forEach((thumbUrl, idx) => {
+          const card = document.createElement("div");
+          card.className = `thumbnail-card ${idx === 0 ? "active" : ""}`;
+          card.innerHTML = `<img src="${thumbUrl}" alt="Thumbnail ${idx}">`;
+          card.addEventListener("click", () => {
+            document.querySelectorAll(".thumbnail-card").forEach(el => el.classList.remove("active"));
+            card.classList.add("active");
+            mainImg.style.opacity = 0.3;
+            setTimeout(() => {
+              mainImg.src = thumbUrl;
+              mainImg.style.opacity = 1;
+            }, 150);
+          });
+          thumbsContainer.appendChild(card);
+        });
+      } else {
+        thumbsContainer.style.display = "none";
+      }
+
       const colorsWrapper = document.getElementById("colors-selector-wrapper");
       const colorsContainer = document.getElementById("colors-container");
       const selectedColorDisplay = document.getElementById("selected-color-display");
-      
       colorsContainer.innerHTML = "";
-
-      if (product.colors && product.colors.length > 0) {
-        selectedColorDisplay.innerText = product.colorNames ? product.colorNames[0] : "";
-        product.colors.forEach((colorHex, idx) => {
+      if (currentProduct.colors && currentProduct.colors.length > 0) {
+        selectedColorDisplay.innerText = currentProduct.colorNames ? currentProduct.colorNames[0] : "";
+        currentProduct.colors.forEach((colorHex, idx) => {
           const swatch = document.createElement("div");
           swatch.className = `color-swatch ${idx === 0 ? "active" : ""}`;
           swatch.style.backgroundColor = colorHex;
           swatch.addEventListener("click", () => {
             document.querySelectorAll(".color-swatch").forEach(el => el.classList.remove("active"));
             swatch.classList.add("active");
-            selectedColorDisplay.innerText = product.colorNames ? product.colorNames[idx] : colorHex;
+            selectedColorDisplay.innerText = currentProduct.colorNames ? currentProduct.colorNames[idx] : colorHex;
           });
           colorsContainer.appendChild(swatch);
         });
@@ -1110,72 +1214,46 @@
         colorsWrapper.style.display = "none";
       }
 
-      // 8. Populate Specs Table
-      const specsTable = document.getElementById("specs-table-display");
-      specsTable.innerHTML = "";
-      if (product.specs) {
-        Object.entries(product.specs).forEach(([key, val]) => {
-          const row = document.createElement("tr");
-          row.innerHTML = `<td>${key}</td><td>${val}</td>`;
-          specsTable.appendChild(row);
-        });
-      } else {
-        document.querySelectorAll(".accordion-item")[1].style.display = "none";
-      }
-
-      // 9. Accordion toggling
       document.querySelectorAll(".accordion-header").forEach(header => {
         header.addEventListener("click", () => {
           const item = header.parentElement;
           const isActive = item.classList.contains("active");
-          
           document.querySelectorAll(".accordion-item").forEach(el => el.classList.remove("active"));
-          
           if (!isActive) {
             item.classList.add("active");
           }
         });
       });
 
-      // 10. Qty minus and plus
       const qtyMinus = document.getElementById("qty-minus");
       const qtyPlus = document.getElementById("qty-plus");
       const qtyInput = document.getElementById("qty-val");
-
       qtyMinus.addEventListener("click", () => {
         let val = parseInt(qtyInput.value) || 1;
-        if (val > 1) {
-          qtyInput.value = val - 1;
-        }
+        if (val > 1) qtyInput.value = val - 1;
       });
       qtyPlus.addEventListener("click", () => {
         let val = parseInt(qtyInput.value) || 1;
         qtyInput.value = val + 1;
       });
 
-      // 11. Add to cart & buy now interactive notifications
       const toast = document.getElementById("toast-el");
-      const addToCartTrigger = document.getElementById("add-to-cart-trigger");
-      const buyNowTrigger = document.getElementById("buy-now-trigger");
-
-      addToCartTrigger.addEventListener("click", () => {
-        toast.querySelector("div").innerHTML = `🛒 <strong>${product.title}</strong> (${qtyInput.value} buc.) adăugat în coș!`;
+      document.getElementById("add-to-cart-trigger").addEventListener("click", () => {
+        const lang = localStorage.getItem('site_lang') || 'ro';
+        const msg = lang === 'ro' ? 'adăugat în coș!' : 'added to cart!';
+        toast.querySelector("div").innerHTML = `🛒 <strong>${currentProduct.title[lang]}</strong> (${qtyInput.value}) ${msg}`;
         toast.classList.add("active");
-        setTimeout(() => {
-          toast.classList.remove("active");
-        }, 4000);
+        setTimeout(() => toast.classList.remove("active"), 4000);
       });
 
-      buyNowTrigger.addEventListener("click", () => {
-        alert(`Simulare Checkout Shopify:\n\nProdus: ${product.title}\nCantitate: ${qtyInput.value}\nPreț total: ${(parseFloat(product.price.replace(".", "")) * parseInt(qtyInput.value)).toLocaleString("ro-RO")} RON\n\nAceasta este o pagină demo creată de Shopify Expert Romania pentru a demonstra funcționalitatea magazinului.`);
+      document.getElementById("buy-now-trigger").addEventListener("click", () => {
+        alert("Simulare Checkout Shopify Demo.");
       });
 
-      // Scroll to reviews anchor
       document.getElementById("reviews-anchor").addEventListener("click", () => {
         document.getElementById("reviews-container-section").scrollIntoView({ behavior: "smooth" });
       });
 
-      // 12. Populate Simulated Reviews
       const reviewsCardsContainer = document.getElementById("reviews-cards-container");
       reviewsCardsContainer.innerHTML = "";
       
@@ -1211,14 +1289,14 @@
           { name: "Marius N.", date: "03 Iunie 2026", stars: "★★★★☆", title: "Foarte bine structurat", comment: "Partea de Machine Learning și Python este explicată pas cu pas. Notebook-urile Jupyter și codul pus la dispoziție sunt clare. Serverul GPU gratuit este un avantaj uriaș." }
         ]
       };
-
-      const selectedReviews = reviewsPool[product.categorySlug] || reviewsPool["fashion"];
+      
+      const selectedReviews = reviewsPool[currentProduct.categorySlug] || reviewsPool["fashion"];
       selectedReviews.forEach(rev => {
         const card = document.createElement("div");
         card.className = "review-card";
         card.innerHTML = `
           <div class="review-header">
-            <span class="reviewer-name">${rev.name} <span class="badge-certified">✓ Verified</span></span>
+            <span class="reviewer-name">${rev.name} <span class="badge-certified">✓</span></span>
             <span class="review-date">${rev.date}</span>
           </div>
           <div style="color: #ffd700; font-size: 0.9rem;">${rev.stars}</div>
@@ -1228,69 +1306,12 @@
         reviewsCardsContainer.appendChild(card);
       });
 
-      // 13. Populate Recommendations (the other 2 products from the same category)
-      const recsContainer = document.getElementById("recommendations-grid-container");
-      recsContainer.innerHTML = "";
+      let initLang = localStorage.getItem('site_lang') || 'ro';
+      renderProductLang(initLang);
+    });
 
-      const allCategoryProducts = Object.values(window.productsData).filter(p => p.categorySlug === product.categorySlug && p.id !== product.id);
-      allCategoryProducts.forEach(recProd => {
-        const card = document.createElement("a");
-        card.href = `/product.html?id=${recProd.id}`;
-        card.className = "product-card";
-        
-        // Custom background styling for cards on recommendation grid if needed
-        let borderStyle = "";
-        let infoColor = "";
-        let titleColor = "";
-        let bgStyle = "";
-        
-        if (product.categorySlug === "bio") {
-          borderStyle = "border-color: #e3dec9;";
-          bgStyle = "background: rgba(255,255,255,0.4);";
-          infoColor = "color: #3b4238;";
-          titleColor = "color: #6a7c64;";
-        } else if (product.categorySlug === "pets") {
-          borderStyle = "border-color: #ffeb99; border-radius: 30px;";
-          bgStyle = "background: #fff; box-shadow: 0 10px 20px rgba(255,153,51,0.1);";
-          infoColor = "color: #333;";
-          titleColor = "color: #ff7043;";
-        } else if (product.categorySlug === "beauty") {
-          borderStyle = "border-color: rgba(189,142,131,0.2); box-shadow: none;";
-          bgStyle = "background: transparent;";
-          infoColor = "color: #4a403b; text-align: center;";
-          titleColor = "color: #bd8e83; font-family: 'Playfair Display', serif; font-size: 1.5rem;";
-        } else if (product.categorySlug === "education") {
-          borderStyle = "border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);";
-          bgStyle = "background: #fff;";
-          infoColor = "color: #334155; padding: 2rem;";
-          titleColor = "color: #0f172a; margin-bottom: 0.5rem; font-weight: 700; font-size: 1.4rem;";
-        } else if (product.categorySlug === "fashion") {
-          bgStyle = "background: var(--glass-bg);";
-          infoColor = "color: #111;";
-          titleColor = "color: #111; font-weight: 500;";
-        } else {
-          bgStyle = "background: rgba(255,255,255,0.03);";
-          titleColor = "color: #00f0ff;";
-        }
-
-        let imgContainerBg = product.categorySlug === "beauty" ? "#fceeea" : (product.categorySlug === "pets" ? "#ffeb99" : (product.categorySlug === "education" ? "#dbeafe" : "#111"));
-        let imgBorderRad = product.categorySlug === "pets" ? "border-radius: 30px 30px 0 0;" : (product.categorySlug === "education" ? "border-radius: 12px 12px 0 0;" : "");
-        let imgAspect = product.categorySlug === "education" ? "aspect-ratio: 16/9;" : "aspect-ratio: 4/5;";
-
-        let recSize = product.categorySlug === "education" ? "800x600" : "800x1000";
-        let recColors = product.categorySlug === "beauty" ? "fceeea/bd8e83" : (product.categorySlug === "pets" ? "ffb067/FFFFFF" : "dbeafe/2563eb");
-        card.style = `${bgStyle} ${borderStyle}`;
-        card.innerHTML = `
-          <div class="product-img-container" style="background: ${imgContainerBg}; ${imgAspect} ${imgBorderRad}">
-            <img src="${recProd.image}" onerror="this.onerror=null; this.src='https://placehold.co/${recSize}/${recColors}?text=${encodeURIComponent(recProd.title)}';" alt="${recProd.title}" class="product-img">
-          </div>
-          <div class="product-info" style="${infoColor}">
-            <h3 class="product-title" style="${titleColor}">${recProd.title}</h3>
-            <span class="product-price">${recProd.price}</span>
-          </div>
-        `;
-        recsContainer.appendChild(card);
-      });
+    window.addEventListener('languageChanged', (e) => {
+      renderProductLang(e.detail);
     });
   </script>
 </body>

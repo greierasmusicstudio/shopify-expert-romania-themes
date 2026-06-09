@@ -214,8 +214,13 @@
   </style>
 </head>
 <body>
+  <!-- Global Language Selector -->
+  <div class="global-lang-selector">
+    <button class="lang-btn" data-lang="ro">RO</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+  </div>
 
-  <a href="/" class="back-btn">← Back to Hub</a>
+  <a href="/" class="back-btn" data-i18n="back_to_hub">← Back to Hub</a>
 
   <nav class="edu-nav animate-fade-in">
     <div class="edu-logo">EduPremier</div>
@@ -330,9 +335,10 @@
   <section class="cta-section animate-on-scroll" style="background: #2563eb; border: none; margin-top: 4rem; color: #fff;">
     <h2 class="edu-title" style="font-size: 3rem; color: #fff;">Transformă Educația</h2>
     <p class="edu-desc" style="margin: 0 auto 3rem auto; color: #dbeafe;">Construiește propria academie online cu această temă avansată creată de Shopify Expert Romania.</p>
-    <a href="/" class="edu-btn-secondary" style="border: none;">Cere o Ofertă</a>
+    <a href="/" class="edu-btn-secondary" style="border: none;" data-i18n="btn_contact">Cere o Ofertă</a>
   </section>
 
+  <script src="/translations.js"></script>
   <script src="/main.js"></script>
 </body>
 </html>

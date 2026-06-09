@@ -183,8 +183,13 @@
   </style>
 </head>
 <body>
+  <!-- Global Language Selector -->
+  <div class="global-lang-selector">
+    <button class="lang-btn" data-lang="ro">RO</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+  </div>
 
-  <a href="/" class="back-btn">← Back to Hub</a>
+  <a href="/" class="back-btn" data-i18n="back_to_hub">← Back to Hub</a>
 
   <nav class="tech-nav animate-fade-in">
     <div class="tech-logo">AURA</div>
@@ -286,9 +291,10 @@
   <section class="cta-section animate-on-scroll" style="background: #030305; border-top: 1px solid #222;">
     <h2 class="cta-title">Treci la Următorul Nivel</h2>
     <p class="cta-desc">Lansează-ți brandul de electronice cu o temă Shopify care reflectă inovația produselor tale.</p>
-    <a href="/" class="tech-btn">Contact Shopify Expert</a>
+    <a href="/" class="tech-btn" data-i18n="btn_contact">Contact Shopify Expert</a>
   </section>
 
+  <script src="/translations.js"></script>
   <script src="/main.js"></script>
 </body>
 </html>

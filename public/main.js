@@ -1,11 +1,61 @@
 // --- PREMIUM ANIMATIONS & INTERACTIONS V2 ---
 
 document.addEventListener('DOMContentLoaded', () => {
+  initI18n();
   initPageTransitions();
   initScrollReveals();
   init3DTilt();
   initParallax();
 });
+
+// --- i18n System ---
+let currentLang = localStorage.getItem('site_lang') || 'ro';
+
+function initI18n() {
+  if (typeof translations !== 'undefined') {
+    applyTranslations(currentLang);
+  }
+  
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const lang = btn.dataset.lang;
+      if(lang) {
+        currentLang = lang;
+        localStorage.setItem('site_lang', lang);
+        applyTranslations(lang);
+        updateActiveLangBtns(lang);
+        window.dispatchEvent(new CustomEvent('languageChanged', { detail: lang }));
+      }
+    });
+  });
+  
+  updateActiveLangBtns(currentLang);
+}
+
+function applyTranslations(lang) {
+  if (typeof translations === 'undefined') return;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (translations[key] && translations[key][lang]) {
+      if(el.tagName === 'INPUT' && (el.type === 'text' || el.type === 'password')) {
+        el.placeholder = translations[key][lang];
+      } else {
+        el.innerHTML = translations[key][lang];
+      }
+    }
+  });
+}
+
+function updateActiveLangBtns(lang) {
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    if(btn.dataset.lang === lang) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+}
 
 // Lenis Smooth Scrolling removed per user request
 // 2. Page Transitions (Preloader)

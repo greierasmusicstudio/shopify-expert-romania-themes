@@ -225,8 +225,13 @@
   </style>
 </head>
 <body>
+  <!-- Global Language Selector -->
+  <div class="global-lang-selector">
+    <button class="lang-btn" data-lang="ro">RO</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+  </div>
 
-  <a href="/" class="back-btn">← Back to Hub</a>
+  <a href="/" class="back-btn" data-i18n="back_to_hub">← Back to Hub</a>
 
   <nav class="beauty-nav animate-fade-in">
     <div class="beauty-logo">Lumière</div>
@@ -355,9 +360,10 @@
   <section class="cta-section animate-on-scroll" style="background: #fceeea; border: none; margin-top: 4rem;">
     <h2 class="beauty-title" style="font-size: 3rem;">Inspiră <i>Eleganță</i></h2>
     <p class="beauty-desc" style="margin: 0 auto 3rem auto;">Lansează-ți brandul de beauty cu o temă care respiră lux. O creație Shopify Expert Romania.</p>
-    <a href="/" class="beauty-btn">Contactează-ne</a>
+    <a href="/" class="beauty-btn" data-i18n="btn_contact">Contact Shopify Expert</a>
   </section>
 
+  <script src="/translations.js"></script>
   <script src="/main.js"></script>
   <script>
     const compSlider = document.getElementById('comp-slider');

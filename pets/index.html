@@ -177,11 +177,16 @@
   </style>
 </head>
 <body>
+  <!-- Global Language Selector -->
+  <div class="global-lang-selector">
+    <button class="lang-btn" data-lang="ro">RO</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+  </div>
 
   <div class="shape shape-1"></div>
   <div class="shape shape-2"></div>
 
-  <a href="/" class="back-btn">← Back to Hub</a>
+  <a href="/" class="back-btn" data-i18n="back_to_hub">← Back to Hub</a>
 
   <nav class="pets-nav animate-fade-in">
     <div class="pets-logo">Joyful Pets</div>
@@ -281,9 +286,10 @@
   <section class="cta-section animate-on-scroll" style="background: #ffeb99; border: none; margin-top: 4rem; position: relative; z-index: 1;">
     <h2 class="pets-title" style="font-size: 3rem;">Iubești Animalele?</h2>
     <p class="pets-desc" style="margin: 0 auto 3rem auto;">Deschide-ți propriul pet shop online cu cea mai prietenoasă temă de la Shopify Expert Romania.</p>
-    <a href="/" class="pets-btn">Contact Shopify Expert</a>
+    <a href="/" class="pets-btn" data-i18n="btn_contact">Contact Shopify Expert</a>
   </section>
 
+  <script src="/translations.js"></script>
   <script src="/main.js"></script>
 </body>
 </html>
