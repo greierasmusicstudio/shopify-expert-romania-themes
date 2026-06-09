@@ -76,11 +76,13 @@ a {
 }
 
 .text-reveal {
-  clip-path: inset(100% 0 0 0);
-  transition: clip-path 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s cubic-bezier(0.25, 1, 0.5, 1);
 }
 .text-reveal.active {
-  clip-path: inset(0 0 0 0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Stagger reveals inside grids */
