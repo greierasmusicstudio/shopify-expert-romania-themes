@@ -1,4 +1,4 @@
-const translations = {
+window.translations = {
   // Global
   "nav_home": { ro: "Acasă", en: "Home" },
   "nav_themes": { ro: "Teme", en: "Themes" },

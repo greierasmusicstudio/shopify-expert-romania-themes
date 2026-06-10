@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 let currentLang = localStorage.getItem('site_lang') || 'ro';
 
 function initI18n() {
-  if (typeof translations !== 'undefined') {
+  if (typeof window.translations !== 'undefined') {
     applyTranslations(currentLang);
   }
   
@@ -34,14 +34,14 @@ function initI18n() {
 }
 
 function applyTranslations(lang) {
-  if (typeof translations === 'undefined') return;
+  if (typeof window.translations === 'undefined') return;
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.dataset.i18n;
-    if (translations[key] && translations[key][lang]) {
+    if (window.translations[key] && window.translations[key][lang]) {
       if(el.tagName === 'INPUT' && (el.type === 'text' || el.type === 'password')) {
-        el.placeholder = translations[key][lang];
+        el.placeholder = window.translations[key][lang];
       } else {
-        el.innerHTML = translations[key][lang];
+        el.innerHTML = window.translations[key][lang];
       }
     }
   });
