@@ -4,6 +4,7 @@ const translations = {
   "nav_themes": { ro: "Teme", en: "Themes" },
   "nav_contact": { ro: "Contact", en: "Contact" },
   "back_to_hub": { ro: "← Înapoi la Hub", en: "← Back to Hub" },
+  "back_to_site": { ro: "Înapoi la site", en: "Back to site" },
   "add_to_cart": { ro: "Adaugă în coș", en: "Add to Cart" },
   "view_details": { ro: "Vezi detalii", en: "View Details" },
   "footer_text": { ro: "© 2026 Shopify Expert Romania. Toate drepturile rezervate.", en: "© 2026 Shopify Expert Romania. All rights reserved." },
