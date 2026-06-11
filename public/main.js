@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveals();
   init3DTilt();
   initParallax();
+  initMobileNav();
 });
 
 // --- i18n System ---
@@ -157,6 +158,87 @@ function initParallax() {
     document.querySelectorAll('.hero-bg, .hero-image img, .beauty-image-wrapper img').forEach(img => {
       const rate = scrolled * 0.15;
       img.style.transform = `translate3d(0, ${rate}px, 0) scale(1.1)`;
+    });
+  });
+}
+
+// 8. Mobile Navigation Hamburger Logic
+function initMobileNav() {
+  const hamburgerBtns = document.querySelectorAll('.hamburger-btn');
+  if (hamburgerBtns.length === 0) return;
+
+  const overlay = document.createElement('div');
+  overlay.className = 'mobile-nav-overlay';
+  const content = document.createElement('div');
+  content.className = 'mobile-nav-content';
+  overlay.appendChild(content);
+  document.body.appendChild(overlay);
+
+  const desktopNav = document.querySelector('.nav-links, .fashion-menu, .tech-nav-links, .bio-menu, .pets-menu, .beauty-menu, .edu-nav-links');
+  
+  if (desktopNav) {
+    const links = desktopNav.querySelectorAll('a');
+    links.forEach(link => {
+      const clonedLink = link.cloneNode(true);
+      clonedLink.addEventListener('click', () => {
+        closeMenu();
+      });
+      content.appendChild(clonedLink);
+    });
+  }
+
+  // Move the global lang selector into the overlay on mobile
+  const langSelector = document.querySelector('.global-lang-selector');
+  if (langSelector) {
+    const langClone = langSelector.cloneNode(true);
+    // remove fixed positioning from clone
+    langClone.style.position = 'relative';
+    langClone.style.top = 'auto';
+    langClone.style.right = 'auto';
+    langClone.style.bottom = 'auto';
+    langClone.style.left = 'auto';
+    langClone.style.zIndex = '1';
+    langClone.style.marginTop = '2rem';
+    
+    // Add logic to lang buttons inside clone
+    langClone.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const lang = btn.dataset.lang;
+        if(lang) {
+          localStorage.setItem('site_lang', lang);
+          if (typeof applyTranslations === 'function') applyTranslations(lang);
+          if (typeof updateActiveLangBtns === 'function') updateActiveLangBtns(lang);
+          window.dispatchEvent(new CustomEvent('languageChanged', { detail: lang }));
+        }
+        closeMenu();
+      });
+    });
+    content.appendChild(langClone);
+  }
+
+  let isOpen = false;
+
+  function openMenu() {
+    isOpen = true;
+    overlay.classList.add('active');
+    document.body.classList.add('menu-open');
+    hamburgerBtns.forEach(btn => btn.innerText = '✕');
+    if(langSelector) langSelector.style.display = 'none'; // hide original
+  }
+
+  function closeMenu() {
+    isOpen = false;
+    overlay.classList.remove('active');
+    document.body.classList.remove('menu-open');
+    hamburgerBtns.forEach(btn => btn.innerText = '☰');
+    if(langSelector) langSelector.style.display = 'flex'; // show original
+  }
+
+  hamburgerBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (isOpen) closeMenu();
+      else openMenu();
     });
   });
 }
