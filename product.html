@@ -984,6 +984,39 @@
   <script src="/products-data.js"></script>
   <script>
     let currentProduct = null;
+    const reviewsPool = {
+      "fashion": [
+        { name: "Maria D.", date: {ro: "15 Mai 2026", en: "May 15, 2026"}, stars: "★★★★★", title: {ro: "Absolut minunat!", en: "Absolutely wonderful!"}, comment: {ro: "Am comandat trench-ul clasic beige și sunt uimită de calitatea croielii. Cusăturile sunt perfecte, iar materialul este foarte rezistent la vânt și ploaie. Arată exact ca un brand de designer de mii de euro.", en: "I ordered the classic beige trench coat and I'm amazed by the tailoring quality. The seams are perfect, and the material is very wind and rain resistant. It looks exactly like a thousand-euro designer brand."} },
+        { name: "Andrei G.", date: {ro: "02 Iunie 2026", en: "June 02, 2026"}, stars: "★★★★★", title: {ro: "Calitate excelentă a pielii", en: "Excellent leather quality"}, comment: {ro: "Noir Leather Handbag a fost un cadou pentru soția mea. Pielea este fină, moale, iar detaliile metalice argintii sunt foarte discrete. Ambalajul cadou a fost de asemenea la înălțime.", en: "The Noir Leather Handbag was a gift for my wife. The leather is fine, soft, and the silver metal details are very discreet. The gift packaging was also top-notch."} },
+        { name: "Ioana V.", date: {ro: "28 Mai 2026", en: "May 28, 2026"}, stars: "★★★★☆", title: {ro: "Confortabili și moderni", en: "Comfortable and modern"}, comment: {ro: "Ghete/sneakers Luna extrem de comozi. Talpa interioară cu spumă cu memorie se simte grozav de la prima purtare. Recomand o mărime mai mică dacă sunteți între mărimi.", en: "Luna sneakers are extremely comfortable. The memory foam insole feels great from the first wear. I recommend sizing down if you are between sizes."} }
+      ],
+      "electronics": [
+        { name: "Vlad B.", date: {ro: "12 Mai 2026", en: "May 12, 2026"}, stars: "★★★★★", title: {ro: "Sunet pur, design SF", en: "Pure sound, sci-fi design"}, comment: {ro: "Aura Nexus este incredibilă! Basul este extrem de bine definit, sunetul acoperă toată sufrageria fără nicio distorsiune. Designul cu iluminare LED reactivă atrage toate privirile.", en: "Aura Nexus is incredible! The bass is extremely well defined, the sound covers the whole living room without any distortion. The reactive LED lighting design catches everyone's eyes."} },
+        { name: "Radu M.", date: {ro: "24 Mai 2026", en: "May 24, 2026"}, stars: "★★★★★", title: {ro: "Anularea zgomotului e magică", en: "Noise cancellation is magical"}, comment: {ro: "ANC-ul pe Aura Pro Studio izolează perfect zgomotul de birou sau metrou. Bateria ține incredibil de mult. Încărcarea rapidă de 10 minute este un salvator de vieți.", en: "The ANC on Aura Pro Studio perfectly isolates office or subway noise. The battery lasts incredibly long. The 10-minute fast charge is a lifesaver."} },
+        { name: "Cristina T.", date: {ro: "08 Iunie 2026", en: "June 08, 2026"}, stars: "★★★★☆", title: {ro: "Foarte rezistent și arătos", en: "Very durable and good looking"}, comment: {ro: "Aura Chronos este ceasul perfect. Carcasa din titan arată spectaculos, sticla safir nu s-a zgâriat deloc deși l-am lovit din greșeală de mai multe ori. GPS-ul este extrem de precis.", en: "Aura Chronos is the perfect watch. The titanium case looks spectacular, the sapphire glass didn't scratch at all even though I accidentally hit it several times. The GPS is extremely accurate."} }
+      ],
+      "bio": [
+        { name: "Elena R.", date: {ro: "19 Mai 2026", en: "May 19, 2026"}, stars: "★★★★★", title: {ro: "Adio ten uscat!", en: "Goodbye dry skin!"}, comment: {ro: "Botanical Face Serum mi-a transformat tenul în doar două săptămâni. Pielea este mult mai elastică și hidratată, fără senzație grasă. Ingredientele bio presate la rece chiar se simt.", en: "Botanical Face Serum transformed my skin in just two weeks. My skin is much more elastic and hydrated, without a greasy feeling. The cold-pressed organic ingredients really stand out."} },
+        { name: "Mihaela S.", date: {ro: "30 Mai 2026", en: "May 30, 2026"}, stars: "★★★★★", title: {ro: "Foarte calmantă", en: "Very soothing"}, comment: {ro: "Cremă super hidratantă! O folosesc în fiecare dimineață. Extractul de mușețel chiar ajută cu roșeața și zonele sensibile din jurul nasului. Recomand cu drag!", en: "Super hydrating cream! I use it every morning. The chamomile extract really helps with redness and sensitive areas around the nose. Highly recommend!"} },
+        { name: "Dan P.", date: {ro: "05 Iunie 2026", en: "June 05, 2026"}, stars: "★★★★★", title: {ro: "Curățare delicată, miros genial", en: "Gentle cleansing, brilliant scent"}, comment: {ro: "Săpunul artizanal cu argilă verde curăță blând fața și corpul. Nu lasă pielea uscată deloc. Mirosul proaspăt de lavandă și rozmarin este incredibil de revigorant dimineața.", en: "The artisanal green clay soap gently cleanses the face and body. It doesn't leave the skin dry at all. The fresh lavender and rosemary scent is incredibly invigorating in the morning."} }
+      ],
+      "pets": [
+        { name: "Mihai T.", date: {ro: "20 Mai 2026", en: "May 20, 2026"}, stars: "★★★★★", title: {ro: "Câinele meu îl adoră!", en: "My dog loves it!"}, comment: {ro: "Pătuțul ortopedic este incredibil. Câinele nostru labrador senior (10 ani) doarme mult mai liniștit și se ridică mult mai ușor dimineața. Husă se spală foarte ușor la mașină.", en: "The orthopedic bed is incredible. Our senior Labrador (10 years) sleeps much more peacefully and gets up much easier in the morning. The cover is very easy to machine wash."} },
+        { name: "Alina D.", date: {ro: "01 Iunie 2026", en: "June 01, 2026"}, stars: "★★★★★", title: {ro: "Postură vizibil îmbunătățită", en: "Visibly improved posture"}, comment: {ro: "Ceramic Feeder este minunat. Pisica noastră nu mai mănâncă grăbită și am observat că refluxul a dispărut complet. Suportul din bambus arată foarte elegant în bucătărie.", en: "The Ceramic Feeder is wonderful. Our cat no longer eats hurriedly and I've noticed the reflux has completely disappeared. The bamboo stand looks very elegant in the kitchen."} },
+        { name: "Bogdan K.", date: {ro: "29 Mai 2026", en: "May 29, 2026"}, stars: "★★★★☆", title: {ro: "Jucărie de nota 10", en: "10/10 Toy"}, comment: {ro: "Smart Toy-ul o ține ocupată pe cățelușă ore întregi. Senzorii de obstacol funcționează perfect, nu rămâne niciodată blocată sub canapea. Merită fiecare ban.", en: "The Smart Toy keeps the puppy busy for hours. The obstacle sensors work perfectly, it never gets stuck under the couch. Worth every penny."} }
+      ],
+      "beauty": [
+        { name: "Sorina L.", date: {ro: "14 Mai 2026", en: "May 14, 2026"}, stars: "★★★★★", title: {ro: "Un lux pentru piele", en: "A luxury for the skin"}, comment: {ro: "Crème de Nuit are o textură incredibil de bogată care pur și simplu oferă confort tenului obosit. Dimineața fața este odihnită, luminoasă și netedă ca mătasea.", en: "Crème de Nuit has an incredibly rich texture that simply comforts tired skin. In the morning, the face is rested, luminous, and smooth as silk."} },
+        { name: "Georgiana A.", date: {ro: "26 Mai 2026", en: "May 26, 2026"}, stars: "★★★★★", title: {ro: "Strălucire garantată", en: "Guaranteed glow"}, comment: {ro: "Elixir Rose Serum este uimitor. L-am cumpărat pentru petele pigmentare și văd deja o îmbunătățire uriașă. Tenul este uniformizat și are un luciu satinat discret.", en: "Elixir Rose Serum is amazing. I bought it for pigmentation spots and I already see a huge improvement. The skin is evened out and has a discreet satin shine."} },
+        { name: "Lavinia O.", date: {ro: "04 Iunie 2026", en: "June 04, 2026"}, stars: "★★★★★", title: {ro: "Parfum persistent și nobil", en: "Persistent and noble fragrance"}, comment: {ro: "Parfum D'Or este absolut hipnotizant! Notele de iasomie și tuberoză se simt calde, bogate și persistă lejer peste 12 ore pe pielea mea. Flaconul arată ca o operă de artă.", en: "Parfum D'Or is absolutely hypnotizing! The jasmine and tuberose notes feel warm, rich, and easily last over 12 hours on my skin. The bottle looks like a work of art."} }
+      ],
+      "education": [
+        { name: "Alexandru P.", date: {ro: "10 Mai 2026", en: "May 10, 2026"}, stars: "★★★★★", title: {ro: "M-am angajat după 7 luni!", en: "I got hired after 7 months!"}, comment: {ro: "Cursul Full-Stack este cel mai bun program din România. Proiectele de portofoliu au fost cheia succesului la interviuri. Mentorii oferă explicații extrem de clare și structurate.", en: "The Full-Stack course is the best program in Romania. The portfolio projects were the key to interview success. The mentors provide extremely clear and structured explanations."} },
+        { name: "Gabriela F.", date: {ro: "21 Mai 2026", en: "May 21, 2026"}, stars: "★★★★★", title: {ro: "Figma la un alt nivel", en: "Figma at another level"}, comment: {ro: "Advanced UI/UX Design m-a ajutat să înțeleg conceptele din spatele unui design system funcțional. Feedback-ul video pe proiecte este de neprețuit, primești sfaturi reale din industrie.", en: "Advanced UI/UX Design helped me understand the concepts behind a functional design system. The video feedback on projects is invaluable, you get real industry advice."} },
+        { name: "Marius N.", date: {ro: "03 Iunie 2026", en: "June 03, 2026"}, stars: "★★★★☆", title: {ro: "Foarte bine structurat", en: "Very well structured"}, comment: {ro: "Partea de Machine Learning și Python este explicată pas cu pas. Notebook-urile Jupyter și codul pus la dispoziție sunt clare. Serverul GPU gratuit este un avantaj uriaș.", en: "The Machine Learning and Python part is explained step-by-step. The Jupyter notebooks and provided code are clear. The free GPU server is a huge advantage."} }
+      ]
+    };
+
     
     function renderProductLang(lang) {
       if (!currentProduct) return;
@@ -1142,6 +1175,27 @@
       
       document.querySelector(".reviews-title").innerText = lang === 'ro' ? "Opinia Clienților Noștri" : "What Our Customers Say";
       document.querySelector(".recommendations-title").innerText = lang === 'ro' ? "S-ar Putea Să-ți Placă Și..." : "You Might Also Like...";
+      
+      // Render Reviews
+      const reviewsCardsContainer = document.getElementById("reviews-cards-container");
+      if(reviewsCardsContainer) {
+        reviewsCardsContainer.innerHTML = "";
+        const selectedReviews = reviewsPool[product.categorySlug] || reviewsPool["fashion"];
+        selectedReviews.forEach(rev => {
+          const card = document.createElement("div");
+          card.className = "review-card";
+          card.innerHTML = `
+            <div class="review-header">
+              <span class="reviewer-name">${rev.name} <span class="badge-certified">✓</span></span>
+              <span class="review-date">${rev.date[lang]}</span>
+            </div>
+            <div style="color: #ffd700; font-size: 0.9rem;">${rev.stars}</div>
+            <div class="review-title">${rev.title[lang]}</div>
+            <p class="review-comment">"${rev.comment[lang]}"</p>
+          `;
+          reviewsCardsContainer.appendChild(card);
+        });
+      }
     }
 
     document.addEventListener("DOMContentLoaded", () => {
@@ -1254,57 +1308,7 @@
         document.getElementById("reviews-container-section").scrollIntoView({ behavior: "smooth" });
       });
 
-      const reviewsCardsContainer = document.getElementById("reviews-cards-container");
-      reviewsCardsContainer.innerHTML = "";
-      
-      const reviewsPool = {
-        "fashion": [
-          { name: "Maria D.", date: "15 Mai 2026", stars: "★★★★★", title: "Absolut minunat!", comment: "Am comandat trench-ul clasic beige și sunt uimită de calitatea croielii. Cusăturile sunt perfecte, iar materialul este foarte rezistent la vânt și ploaie. Arată exact ca un brand de designer de mii de euro." },
-          { name: "Andrei G.", date: "02 Iunie 2026", stars: "★★★★★", title: "Calitate excelentă a pielii", comment: "Noir Leather Handbag a fost un cadou pentru soția mea. Pielea este fină, moale, iar detaliile metalice argintii sunt foarte discrete. Ambalajul cadou a fost de asemenea la înălțime." },
-          { name: "Ioana V.", date: "28 Mai 2026", stars: "★★★★☆", title: "Confortabili și moderni", comment: "Ghete/sneakers Luna extrem de comozi. Talpa interioară cu spumă cu memorie se simte grozav de la prima purtare. Recomand o mărime mai mică dacă sunteți între mărimi." }
-        ],
-        "electronics": [
-          { name: "Vlad B.", date: "12 Mai 2026", stars: "★★★★★", title: "Sunet pur, design SF", comment: "Aura Nexus este incredibilă! Basul este extrem de bine definit, sunetul acoperă toată sufrageria fără nicio distorsiune. Designul cu iluminare LED reactivă atrage toate privirile." },
-          { name: "Radu M.", date: "24 Mai 2026", stars: "★★★★★", title: "Anularea zgomotului e magică", comment: "ANC-ul pe Aura Pro Studio izolează perfect zgomotul de birou sau metrou. Bateria ține incredibil de mult. Încărcarea rapidă de 10 minute este un salvator de vieți." },
-          { name: "Cristina T.", date: "08 Iunie 2026", stars: "★★★★☆", title: "Foarte rezistent și arătos", comment: "Aura Chronos este ceasul perfect. Carcasa din titan arată spectaculos, sticla safir nu s-a zgâriat deloc deși l-am lovit din greșeală de mai multe ori. GPS-ul este extrem de precis." }
-        ],
-        "bio": [
-          { name: "Elena R.", date: "19 Mai 2026", stars: "★★★★★", title: "Adio ten uscat!", comment: "Botanical Face Serum mi-a transformat tenul în doar două săptămâni. Pielea este mult mai elastică și hidratată, fără senzație grasă. Ingredientele bio presate la rece chiar se simt." },
-          { name: "Mihaela S.", date: "30 Mai 2026", stars: "★★★★★", title: "Foarte calmantă", comment: "Cremă super hidratantă! O folosesc în fiecare dimineață. Extractul de mușețel chiar ajută cu roșeața și zonele sensibile din jurul nasului. Recomand cu drag!" },
-          { name: "Dan P.", date: "05 Iunie 2026", stars: "★★★★★", title: "Curățare delicată, miros genial", comment: "Săpunul artizanal cu argilă verde curăță blând fața și corpul. Nu lasă pielea uscată deloc. Mirosul proaspăt de lavandă și rozmarin este incredibil de revigorant dimineața." }
-        ],
-        "pets": [
-          { name: "Mihai T.", date: "20 Mai 2026", stars: "★★★★★", title: "Câinele meu îl adoră!", comment: "Pătuțul ortopedic este incredibil. Câinele nostru labrador senior (10 ani) doarme mult mai liniștit și se ridică mult mai ușor dimineața. Husă se spală foarte ușor la mașină." },
-          { name: "Alina D.", date: "01 Iunie 2026", stars: "★★★★★", title: "Postură vizibil îmbunătățită", comment: "Ceramic Feeder este minunat. Pisica noastră nu mai mănâncă grăbită și am observat că refluxul a dispărut complet. Suportul din bambus arată foarte elegant în bucătărie." },
-          { name: "Bogdan K.", date: "29 Mai 2026", stars: "★★★★☆", title: "Jucărie de nota 10", comment: "Smart Toy-ul o ține ocupată pe cățelușă ore întregi. Senzorii de obstacol funcționează perfect, nu rămâne niciodată blocată sub canapea. Merită fiecare ban." }
-        ],
-        "beauty": [
-          { name: "Sorina L.", date: "14 Mai 2026", stars: "★★★★★", title: "Un lux pentru piele", comment: "Crème de Nuit are o textură incredibil de bogată care pur și simplu oferă confort tenului obosit. Dimineața fața este odihnită, luminoasă și netedă ca mătasea." },
-          { name: "Georgiana A.", date: "26 Mai 2026", stars: "★★★★★", title: "Strălucire garantată", comment: "Elixir Rose Serum este uimitor. L-am cumpărat pentru petele pigmentare și văd deja o îmbunătățire uriașă. Tenul este uniformizat și are un luciu satinat discret." },
-          { name: "Lavinia O.", date: "04 Iunie 2026", stars: "★★★★★", title: "Parfum persistent și nobil", comment: "Parfum D'Or este absolut hipnotizant! Notele de iasomie și tuberoză se simt calde, bogate și persistă lejer peste 12 ore pe pielea mea. Flaconul arată ca o operă de artă." }
-        ],
-        "education": [
-          { name: "Alexandru P.", date: "10 Mai 2026", stars: "★★★★★", title: "M-am angajat după 7 luni!", comment: "Cursul Full-Stack este cel mai bun program din România. Proiectele de portofoliu au fost cheia succesului la interviuri. Mentorii oferă explicații extrem de clare și structurate." },
-          { name: "Gabriela F.", date: "21 Mai 2026", stars: "★★★★★", title: "Figma la un alt nivel", comment: "Advanced UI/UX Design m-a ajutat să înțeleg conceptele din spatele unui design system funcțional. Feedback-ul video pe proiecte este de neprețuit, primești sfaturi reale din industrie." },
-          { name: "Marius N.", date: "03 Iunie 2026", stars: "★★★★☆", title: "Foarte bine structurat", comment: "Partea de Machine Learning și Python este explicată pas cu pas. Notebook-urile Jupyter și codul pus la dispoziție sunt clare. Serverul GPU gratuit este un avantaj uriaș." }
-        ]
-      };
-      
-      const selectedReviews = reviewsPool[currentProduct.categorySlug] || reviewsPool["fashion"];
-      selectedReviews.forEach(rev => {
-        const card = document.createElement("div");
-        card.className = "review-card";
-        card.innerHTML = `
-          <div class="review-header">
-            <span class="reviewer-name">${rev.name} <span class="badge-certified">✓</span></span>
-            <span class="review-date">${rev.date}</span>
-          </div>
-          <div style="color: #ffd700; font-size: 0.9rem;">${rev.stars}</div>
-          <div class="review-title">${rev.title}</div>
-          <p class="review-comment">"${rev.comment}"</p>
-        `;
-        reviewsCardsContainer.appendChild(card);
-      });
+
 
       let initLang = localStorage.getItem('site_lang') || 'ro';
       renderProductLang(initLang);
